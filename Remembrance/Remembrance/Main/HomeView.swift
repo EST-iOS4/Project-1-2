@@ -9,16 +9,14 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            
         }
-        .padding()
     }
 }
 
 #Preview {
     HomeView()
 }
+
+// TODO: 리스트뷰, 통계뷰, 설정뷰
