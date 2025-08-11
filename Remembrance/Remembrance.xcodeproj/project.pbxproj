@@ -6,17 +6,18 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		350690862E49AD5B008FED38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 350690822E49AD5B008FED38 /* Assets.xcassets */; };
+		350690872E49AD5B008FED38 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690832E49AD5B008FED38 /* HomeView.swift */; };
+		350690882E49AD5B008FED38 /* RemembranceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690842E49AD5B008FED38 /* RemembranceApp.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		350690672E49A879008FED38 /* Remembrance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remembrance.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		350690822E49AD5B008FED38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		350690832E49AD5B008FED38 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		350690842E49AD5B008FED38 /* RemembranceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemembranceApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		350690692E49A879008FED38 /* Remembrance */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Remembrance;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		350690642E49A879008FED38 /* Frameworks */ = {
@@ -32,7 +33,7 @@
 		3506905E2E49A878008FED38 = {
 			isa = PBXGroup;
 			children = (
-				350690692E49A879008FED38 /* Remembrance */,
+				350690852E49AD5B008FED38 /* Remembrance */,
 				350690682E49A879008FED38 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +44,48 @@
 				350690672E49A879008FED38 /* Remembrance.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3506907F2E49AD5B008FED38 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		350690802E49AD5B008FED38 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		350690812E49AD5B008FED38 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		350690852E49AD5B008FED38 /* Remembrance */ = {
+			isa = PBXGroup;
+			children = (
+				3506908A2E49B62C008FED38 /* Main */,
+				3506907F2E49AD5B008FED38 /* Onboarding */,
+				350690802E49AD5B008FED38 /* Setting */,
+				350690812E49AD5B008FED38 /* Statistics */,
+				350690822E49AD5B008FED38 /* Assets.xcassets */,
+				350690832E49AD5B008FED38 /* HomeView.swift */,
+				350690842E49AD5B008FED38 /* RemembranceApp.swift */,
+			);
+			path = Remembrance;
+			sourceTree = "<group>";
+		};
+		3506908A2E49B62C008FED38 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,9 +102,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				350690692E49A879008FED38 /* Remembrance */,
 			);
 			name = Remembrance;
 			packageProductDependencies = (
@@ -109,6 +149,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				350690862E49AD5B008FED38 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +160,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				350690872E49AD5B008FED38 /* HomeView.swift in Sources */,
+				350690882E49AD5B008FED38 /* RemembranceApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
