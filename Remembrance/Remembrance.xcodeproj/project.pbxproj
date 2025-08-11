@@ -12,6 +12,7 @@
 		350690882E49AD5B008FED38 /* RemembranceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690842E49AD5B008FED38 /* RemembranceApp.swift */; };
 		3506908C2E49B94D008FED38 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506908B2E49B94D008FED38 /* SettingView.swift */; };
 		3506908E2E49B984008FED38 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506908D2E49B984008FED38 /* StatisticsView.swift */; };
+		350690902E49BB53008FED38 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506908F2E49BB53008FED38 /* OnBoardingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		350690842E49AD5B008FED38 /* RemembranceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemembranceApp.swift; sourceTree = "<group>"; };
 		3506908B2E49B94D008FED38 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3506908D2E49B984008FED38 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		3506908F2E49BB53008FED38 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		3506907F2E49AD5B008FED38 /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
+				3506908F2E49BB53008FED38 /* OnBoardingView.swift */,
 			);
 			path = OnBoarding;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				3506908C2E49B94D008FED38 /* SettingView.swift in Sources */,
 				3506908E2E49B984008FED38 /* StatisticsView.swift in Sources */,
 				350690872E49AD5B008FED38 /* HomeView.swift in Sources */,
+				350690902E49BB53008FED38 /* OnBoardingView.swift in Sources */,
 				350690882E49AD5B008FED38 /* RemembranceApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
