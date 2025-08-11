@@ -13,6 +13,7 @@
 		3506908C2E49B94D008FED38 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506908B2E49B94D008FED38 /* SettingView.swift */; };
 		3506908E2E49B984008FED38 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506908D2E49B984008FED38 /* StatisticsView.swift */; };
 		350690902E49BB53008FED38 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506908F2E49BB53008FED38 /* OnBoardingView.swift */; };
+		350690982E49C658008FED38 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690972E49C658008FED38 /* ListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		3506908B2E49B94D008FED38 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3506908D2E49B984008FED38 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		3506908F2E49BB53008FED38 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		350690972E49C658008FED38 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				3506908A2E49B62C008FED38 /* Main */,
+				350690942E49C645008FED38 /* ContentList */,
 				3506907F2E49AD5B008FED38 /* OnBoarding */,
 				350690802E49AD5B008FED38 /* Setting */,
 				350690812E49AD5B008FED38 /* Statistics */,
@@ -95,6 +98,14 @@
 				350690832E49AD5B008FED38 /* HomeView.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		350690942E49C645008FED38 /* ContentList */ = {
+			isa = PBXGroup;
+			children = (
+				350690972E49C658008FED38 /* ListView.swift */,
+			);
+			path = ContentList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +182,7 @@
 			files = (
 				3506908C2E49B94D008FED38 /* SettingView.swift in Sources */,
 				3506908E2E49B984008FED38 /* StatisticsView.swift in Sources */,
+				350690982E49C658008FED38 /* ListView.swift in Sources */,
 				350690872E49AD5B008FED38 /* HomeView.swift in Sources */,
 				350690902E49BB53008FED38 /* OnBoardingView.swift in Sources */,
 				350690882E49AD5B008FED38 /* RemembranceApp.swift in Sources */,

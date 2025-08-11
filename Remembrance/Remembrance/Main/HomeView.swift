@@ -8,8 +8,30 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var selectedTab: Int = 0
     var body: some View {
-        Text("hello")
+        NavigationStack {
+            TabView {
+                ListView()
+                    .tabItem {
+                        Image(systemName: "pencil.circle.fill")
+                        Text("First")
+                    }
+                
+                Text("plus")
+                    .tabItem {
+                        Image(systemName: "plus")
+                        
+                    }
+                
+                SettingView()
+                    .tabItem {
+                        Image(systemName: "gear")
+                        Text("Setting")
+                    }
+            }
+            .navigationTitle("나의 Log")
+        }
     }
 }
 
