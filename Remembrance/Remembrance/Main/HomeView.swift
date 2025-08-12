@@ -36,7 +36,8 @@ struct HomeView: View {
                     }
                     .tag(2)
             }
-            .navigationTitle("나의 Log")
+          //커스텀네비게이션바 만들어서 월별이동, 현재날짜표시
+            .navigationTitle("AUGUST")
             .onChange(of: selectedTab) { oldValue, newValue in
                 print("\(oldValue) => \(newValue)")
                 if newValue == 1 {

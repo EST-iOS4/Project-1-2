@@ -27,6 +27,7 @@ struct ListView: View {
       // 캘린더와 통계
       Section {
         VStack(alignment: .leading, spacing: 12) {
+          //나의회고 log는 깃헙 잔디 스타일로 수평 스크롤로 구현하기 (단위는 1년 단위)
           Text("나의 회고 Log")
           LogCalenderView()
         }
@@ -36,7 +37,8 @@ struct ListView: View {
       
       Section {
         VStack(alignment: .leading, spacing: 12) {
-          Text("최고 작성률 Log")
+          //페페 Log는 전체 페페 데이터를 계산해서 퍼센테이지 등으로 나타내주기
+          Text("페페 Log")
           LogStatisticsView()
         }
       }
