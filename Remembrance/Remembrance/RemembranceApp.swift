@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct RemembranceApp: App {
@@ -13,5 +14,7 @@ struct RemembranceApp: App {
         WindowGroup {
             HomeView()
         }
+        .modelContainer(for: [LogModel.self])
     }
 }
+

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(\.modelContext) private var modelContext
+    
     @State private var selectedTab: Int = 0
     @State private var showNewPost: Bool = false
     
