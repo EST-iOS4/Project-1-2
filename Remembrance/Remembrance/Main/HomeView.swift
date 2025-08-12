@@ -9,28 +9,42 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var selectedTab: Int = 0
+    @State private var showNewPost: Bool = false
+    
     var body: some View {
         NavigationStack {
-            TabView {
+            TabView(selection: $selectedTab) {
                 ListView()
                     .tabItem {
                         Image(systemName: "pencil.circle.fill")
                         Text("First")
                     }
+                    .tag(0)
                 
                 Text("plus")
                     .tabItem {
                         Image(systemName: "plus")
-                        
                     }
-                
+                    .tag(1)
+                    
                 SettingView()
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Setting")
                     }
+                    .tag(2)
             }
             .navigationTitle("나의 Log")
+            .onChange(of: selectedTab) { oldValue, newValue in
+                print("\(oldValue) => \(newValue)")
+                if newValue == 1 {
+                    showNewPost = true
+                    selectedTab = oldValue
+                }
+            }
+            .sheet(isPresented: $showNewPost){
+                SaveView()
+            }
         }
     }
 }
