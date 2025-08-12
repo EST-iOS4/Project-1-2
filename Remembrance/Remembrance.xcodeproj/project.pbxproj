@@ -31,6 +31,14 @@
 		6B90391C2E4AD57C006ED1DA /* SaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0FD00A9F2E4AF7DC008617B7 /* Model */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		350690642E49A879008FED38 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -85,6 +93,7 @@
 		350690852E49AD5B008FED38 /* Remembrance */ = {
 			isa = PBXGroup;
 			children = (
+				0FD00A9F2E4AF7DC008617B7 /* Model */,
 				3506908A2E49B62C008FED38 /* Main */,
 				350690942E49C645008FED38 /* ContentList */,
 				3506907F2E49AD5B008FED38 /* OnBoarding */,
@@ -128,6 +137,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0FD00A9F2E4AF7DC008617B7 /* Model */,
 			);
 			name = Remembrance;
 			packageProductDependencies = (
