@@ -24,13 +24,15 @@ struct PepeItem: Identifiable {
 }
 
 struct ListView: View {
-    @State private var logs: [LogItem] = [
-        LogItem(title: "8월 1일 회고"),
-        LogItem(title: "8월 2일 회고"),
-        LogItem(title: "8월 3일 회고"),
-        LogItem(title: "8월 4일 회고"),
-        LogItem(title: "8월 5일 회고")
-    ]
+    @Query private var logModel: [LogModel]
+//    @State private var logs: [LogItem] = [
+//        LogItem(title: "8월 1일 회고"),
+//        LogItem(title: "8월 2일 회고"),
+//        LogItem(title: "8월 3일 회고"),
+//        LogItem(title: "8월 4일 회고"),
+//        LogItem(title: "8월 5일 회고")
+//    ]
+    
     @State private var pepes: [PepeItem] = [
         PepeItem(type: "허탈", count: 5, imageName: "pepeBlank"),
         PepeItem(type: "슬픔", count: 4, imageName: "pepeCry"),
@@ -66,8 +68,8 @@ struct ListView: View {
             
             Section {
                 Text("Log")
-                ForEach($logs) { $log in
-                    LogListView(log: $log)
+                ForEach(logModel) { log in
+                    LogListView(logModel: log)
                     
                 }
             }
@@ -124,23 +126,29 @@ struct LogStatisticsView: View {
 }
 
 struct LogListView: View {
-    @Binding var log: LogItem
+    let logModel: LogModel
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
     
-    var body: some View {
+        var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(lineWidth: 1)             //윤곽선
             .frame(height: 60)                //크기
             .overlay(alignment: .leading){    //내부 글자
-                Text(log.title)
+                Text("\(logModel.date, formatter: dateFormatter)")
                     .foregroundColor(.primary)
                     .padding(.leading, 24)        // 박스 안쪽 여백
             }.background(
-                NavigationLink("이동", destination: ListDetailView())
+                NavigationLink("이동", destination: ListDetailView(logModel: logModel))
                     .opacity(0)
                     .frame(height: 60)
             )
     }
 }
+
 
 #Preview {
     ListView()

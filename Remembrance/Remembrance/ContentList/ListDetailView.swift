@@ -6,15 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ListDetailView: View {
+    @Environment(\.modelContext) private var modelContext
+//    @Query private var logModel: [LogModel]
+    let logModel: LogModel
+    
     @State private var text: String = "write something"
+    
     let date = Date()
     let dateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    
     
     var body: some View {
         NavigationStack {
@@ -25,7 +32,7 @@ struct ListDetailView: View {
                     
                     Spacer()
                     
-                    Text("\(date, formatter: dateFormat)")
+                    Text("\(logModel.date, formatter: dateFormat)")
                 }
                 .padding()
                 
@@ -46,16 +53,17 @@ struct ListDetailView: View {
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    Text("내용")
-                        .font(.system(size: 17, weight: .bold))
-                    
-                    TextEditor(text: $text)
-                    // MARK: - 메모
-                    // TODO: 내용 TextEditor 200자 제한, 글씨 수 셀 수 있는 로직 추가하기
-                    // TODO: 프레임을 동적으로 적용할 수 있도록 고려하기 (아이패드도 지원해야 함)
+                    RoundedRectangle(cornerRadius: 20)
+                        .overlay {
+                            Text("\(logModel.content)")
+                                .font(.system(size: 17, weight: .bold))
+                            
+                            // MARK: - 메모
+                            // TODO: 내용 TextEditor 200자 제한, 글씨 수 셀 수 있는 로직 추가하기
+                            // TODO: 프레임을 동적으로 적용할 수 있도록 고려하기 (아이패드도 지원해야 함)
+                        }
                         .frame(width: 380, height: 400)
-                        .border(.blue)
-                        .foregroundStyle(Color.gray)
+                        .foregroundStyle(Color.gray.opacity(0.3))
                     
                 }
             }
@@ -69,5 +77,5 @@ struct ListDetailView: View {
 }
 
 #Preview {
-    ListDetailView()
+    ListDetailView(logModel: LogModel(id: UUID(), emoji: ""))
 }

@@ -17,7 +17,14 @@ class LogModel: Identifiable {
     var content: String
     var tag: String
     
-    init(id: UUID, emoji: String, date: Date, title: String, content: String, tag: String) {
+    init(
+        id: UUID,
+        emoji: String = "",
+        date: Date = .now,
+        title: String = "",
+        content: String = "",
+        tag: String = ""
+    ) {
         self.id = id
         self.emoji = emoji
         self.date = date
