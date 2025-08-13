@@ -75,6 +75,7 @@ struct ListView: View {
                             Button {
                                 modelContext.delete(log)
                             } label: {
+                                // MARK: - 삭제시 삭제 버튼 자연스럽게 만들기
                                 Text("삭제")
                             }
                             .tint(.red)
