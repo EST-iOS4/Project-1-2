@@ -47,34 +47,37 @@ struct ListView: View {
         List {
             // 캘린더와 통계
             Section {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: 16) {
                     //나의회고 log는 깃헙 잔디 스타일로 수평 스크롤로 구현하기 (단위는 1년 단위)
-                    Text("나의 회고 Log")
+                    Text("이만큼 기록했어요!")
+                        .font(.headline)
                     LogCalenderView(pepes: $pepes)
                 }
             }
+            .padding(.bottom, 28)
             .listRowSeparator(.hidden)
             
-            
             Section {
-                VStack(alignment: .leading, spacing: 18) {
+                VStack(alignment: .leading, spacing: 16) {
                     //페페 Log는 전체 페페 데이터를 계산해서 퍼센테이지 등으로 나타내주기
-                    Text("Mood of Pepe")
-                        .font(.system(size: 18))
+                    Text("감정 통계")
+                        .font(.headline)
                     LogStatisticsView(pepes: $pepes)
                 }
             }
+            .padding(.bottom, 28)
             .listRowSeparator(.hidden)
             
             
             Section {
-                Text("Log")
+                Text("기록")
+                    .font(.headline)
                 if logModel.isEmpty {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(lineWidth: 1)
                         .frame(height: 60)
                         .overlay {
-                            Text("나만의 Log를 만들어주세요!")
+                            Text("아직 기록이 없네요!")
                                 .font(.system(size: 16, weight: .semibold))
                                 .foregroundStyle(.secondary)
                         }
