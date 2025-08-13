@@ -25,6 +25,7 @@ struct PepeItem: Identifiable {
 
 struct ListView: View {
     @Query private var logModel: [LogModel]
+    @Environment(\.modelContext) private var modelContext
 //    @State private var logs: [LogItem] = [
 //        LogItem(title: "8월 1일 회고"),
 //        LogItem(title: "8월 2일 회고"),
@@ -70,7 +71,14 @@ struct ListView: View {
                 Text("Log")
                 ForEach(logModel) { log in
                     LogListView(logModel: log)
-                    
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button {
+                                modelContext.delete(log)
+                            } label: {
+                                Text("삭제")
+                            }
+                            .tint(.red)
+                        }
                 }
             }
             .listRowInsets(.init(top: 0, leading: 16, bottom: 12, trailing: 16))
