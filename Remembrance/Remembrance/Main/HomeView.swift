@@ -45,9 +45,12 @@ struct HomeView: View {
                     selectedTab = oldValue
                 }
             }
-            .sheet(isPresented: $showNewPost){
-                SaveView()
+            .fullScreenCover(isPresented: $showNewPost) {
+              SaveView()
             }
+//            .sheet(isPresented: $showNewPost){
+//                SaveView()
+//            }
         }
     }
 }

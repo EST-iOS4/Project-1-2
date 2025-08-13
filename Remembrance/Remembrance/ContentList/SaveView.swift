@@ -59,7 +59,7 @@ struct SaveView: View {
     @State private var selectDate: Date = Date()
     
     // 텍스트 에디터 초기 글자
-    private let placeholder: String = "Type something..."
+    private let placeholder: String = "기록을 작성해 보세요!"
     
     let date = Date()
     let dateFormat: DateFormatter = {
@@ -73,13 +73,20 @@ struct SaveView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                HStack {
-                    Text("\(selectDate, formatter: dateFormat)")
+          VStack {
+              //큰제목으로
+              TextField(" 제목", text:$title).font(.title.weight(.semibold))
+                    .padding(10)
+                    .background(Color(UIColor.systemGray6))
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .padding(.bottom, 28)
                     
+                HStack {
+                  Text("날짜").font(.title3).fontWeight(.semibold)
                     DatePicker("", selection: $selectDate, displayedComponents: [.date])
                         .datePickerStyle(.compact)
                 }
+                .padding(.bottom, 28)
                 
                 HStack {
                     ForEach(circles, id: \.self) { circles in
@@ -91,22 +98,29 @@ struct SaveView: View {
                         
                     }
                 }
+                .padding(.bottom, 28)
                 .background()
                 
-                TextField("제목", text:$title).font(.system(size: 18))
-                    .padding(3)
-                    .border(.black, width: 1)
+              
                 
-                VStack(alignment: .leading) {
-                    Text("내용")
-                    TextEditor(text: $text).customTextEditor(placeholder: placeholder, userInput: $text)
-                    Picker("", selection: $tagDatas) {
-                        ForEach (tagDatas, id: \.self) { tagData in
-                            Text(tagData)
-                                .frame(width: 40)
-                        }
-                    }
-                    .pickerStyle(.segmented)
+                VStack(alignment: .leading, spacing: 16) {
+                  HStack {
+                    Text("내용").font(.title3).fontWeight(.semibold)
+                    //태그 수정예정
+                    DatePicker("", selection: $selectDate, displayedComponents: [.date])
+                        .datePickerStyle(.compact)
+                        .padding(0)
+                  }
+
+                  
+                  TextEditor(text: $text).customTextEditor(placeholder: placeholder, userInput: $text)
+//                    Picker("", selection: $tagDatas) {
+//                        ForEach (tagDatas, id: \.self) { tagData in
+//                            Text(tagData)
+//                                .frame(width: 40)
+//                        }
+//                    }
+//                    .pickerStyle(.segmented)
                 }
                 
             }
@@ -117,7 +131,15 @@ struct SaveView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image(systemName: "x.circle.fill")
+                      Text("취소")
+                        .foregroundStyle(.red)
+//                      RoundedRectangle(cornerRadius: 8)
+//                        .fill(Color.green)
+//                        .overlay {
+//                          Text("취소")
+//                            .foregroundStyle(.red)
+//                        }
+//                        .frame(width: 50, height: 30)
                     }
                 }
                 
@@ -137,7 +159,13 @@ struct SaveView: View {
                         
                         dismiss()
                     } label: {
-                        Image(systemName: "checkmark")
+                      RoundedRectangle(cornerRadius: 8)
+                        .fill(text.isEmpty ? Color.gray : Color.green)
+                        .overlay {
+                          Text("완료")
+                            .foregroundStyle(.white)
+                        }
+                        .frame(width: 50, height: 30)
                     }
                     .disabled(text.isEmpty)
                 }
@@ -160,7 +188,7 @@ struct CustomTextEditorStyle: ViewModifier {
                         .lineSpacing(10)
                         .padding(20)
                         .padding(.top, 2)
-                        .font(.system(size: 14))
+                        .font(.body)
                         .foregroundStyle(Color(UIColor.systemGray2))
                 }
             }
@@ -169,8 +197,9 @@ struct CustomTextEditorStyle: ViewModifier {
             .background(Color(UIColor.systemGray6))
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .scrollContentBackground(.hidden)
-      //여기 고쳐야함
-            .frame(width: .infinity, height: 500)
+      //여기 고쳐야함 (공부하고 적용해야함..잘 머르겠움..)
+//            .frame(width: .infinity, height: 500)
+            .frame(width: .infinity, height: .infinity)
             .overlay(alignment: .bottomTrailing) {
                 Text("\(text.count) / 200")
                     .padding()

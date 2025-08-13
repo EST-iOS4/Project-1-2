@@ -50,7 +50,7 @@ struct ListView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     //나의회고 log는 깃헙 잔디 스타일로 수평 스크롤로 구현하기 (단위는 1년 단위)
                     Text("이만큼 기록했어요!")
-                        .font(.headline)
+                    .font(.title3).fontWeight(.semibold)
                     LogCalenderView(pepes: $pepes)
                 }
             }
@@ -61,7 +61,7 @@ struct ListView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     //페페 Log는 전체 페페 데이터를 계산해서 퍼센테이지 등으로 나타내주기
                     Text("감정 통계")
-                        .font(.headline)
+                    .font(.title3).fontWeight(.semibold)
                     LogStatisticsView(pepes: $pepes)
                 }
             }
@@ -71,7 +71,7 @@ struct ListView: View {
             
             Section {
                 Text("기록")
-                    .font(.headline)
+                .font(.title3).fontWeight(.semibold)
                 if logModel.isEmpty {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(lineWidth: 1)
