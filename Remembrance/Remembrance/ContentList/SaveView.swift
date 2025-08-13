@@ -169,6 +169,7 @@ struct CustomTextEditorStyle: ViewModifier {
             .background(Color(UIColor.systemGray6))
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .scrollContentBackground(.hidden)
+      //여기 고쳐야함
             .frame(width: .infinity, height: 500)
             .overlay(alignment: .bottomTrailing) {
                 Text("\(text.count) / 200")

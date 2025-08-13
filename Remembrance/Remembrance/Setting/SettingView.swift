@@ -13,8 +13,9 @@ struct SettingView: View {
   
   @Namespace private var animation
     var body: some View {
-      VStack(alignment: .leading) {
+      VStack(alignment: .leading, spacing: 8) {
         Text("설정하기").font(.title).bold()
+        
         Text("폰트사이즈").font(.title3).bold()
         HStack {
           Text("가")
@@ -24,7 +25,7 @@ struct SettingView: View {
         .frame(width: .infinity,height: 50)
         .background(Color.blue)
         Text("테마").font(.title3).bold()
-        VStack(spacing: 15) {
+        VStack(spacing: 8) {
           Circle()
             .fill(userTheme.color(scheme).gradient)
             .frame(width: 150, height: 150)
@@ -32,7 +33,7 @@ struct SettingView: View {
             .font(.title2.bold())
             .padding()
           
-          HStack(spacing: 0) {
+          HStack {
             ForEach(Theme.allCases, id: \.rawValue) { theme in
               Text(theme.rawValue)
                 .padding(.vertical, 10)
@@ -57,10 +58,12 @@ struct SettingView: View {
           .background(.primary.opacity(0.06), in: .capsule)
           .padding(.top, 20)
         }
-        
+        .frame(width: .infinity)
       }
 //      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .background(.themeBG)
+      .padding(20)
+//      .background(.themeBG)
+      .background(Color.brown)
       .environment(\.colorScheme, scheme)
       .preferredColorScheme(userTheme.colorScheme)
     }

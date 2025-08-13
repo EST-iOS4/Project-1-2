@@ -97,8 +97,9 @@ struct ListView: View {
             .listRowSeparator(.hidden)
             
             
-        }.listStyle(.plain)
-            .listSectionSpacing(8)  //Section사이의 거리
+        }
+        .listStyle(.plain)
+        .listSectionSpacing(8)  //Section사이의 거리
     }
     
 }
