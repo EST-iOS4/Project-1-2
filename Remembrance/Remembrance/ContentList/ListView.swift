@@ -69,17 +69,28 @@ struct ListView: View {
             
             Section {
                 Text("Log")
-                ForEach(logModel) { log in
-                    LogListView(logModel: log)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button {
-                                modelContext.delete(log)
-                            } label: {
-                                // MARK: - 삭제시 삭제 버튼 자연스럽게 만들기
-                                Text("삭제")
-                            }
-                            .tint(.red)
+                if logModel.isEmpty {
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: 1)
+                        .frame(height: 60)
+                        .overlay {
+                            Text("나만의 Log를 만들어주세요!")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundStyle(.secondary)
                         }
+                } else {
+                    ForEach(logModel) { log in
+                        LogListView(logModel: log)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button {
+                                    modelContext.delete(log)
+                                } label: {
+                                    // MARK: - 삭제시 삭제 버튼 자연스럽게 만들기
+                                    Text("삭제")
+                                }
+                                .tint(.red)
+                            }
+                    }
                 }
             }
             .listRowInsets(.init(top: 0, leading: 16, bottom: 12, trailing: 16))
