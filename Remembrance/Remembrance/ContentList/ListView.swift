@@ -44,77 +44,96 @@ struct ListView: View {
     ]
     
     var body: some View {
-        List {
-            // 캘린더와 통계
-            Section {
-                VStack(alignment: .leading, spacing: 16) {
-                    //나의회고 log는 깃헙 잔디 스타일로 수평 스크롤로 구현하기 (단위는 1년 단위)
-                    Text("이만큼 기록했어요!")
-                        .font(.title3).fontWeight(.semibold)
-                    LogCalenderView(pepes: $pepes)
-                }
+        VStack{
+            //버튼을 picker로 변경하면됨
+            Button{}
+            label: {
+                HStack(spacing: 14){
+                    Text("8월")
+                        .lineLimit(1)
+                        .font(.largeTitle)
+                    Image(systemName: "chevron.down")
+                }.padding(.horizontal, 10)
+                    .padding(.vertical, 6)
+                    .background(Color.clear)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(.black, lineWidth: 0.5)
+                    )
             }
+            .buttonStyle(.plain) // 기본 파란색하고 하이라이트 제거
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 12)
             .padding(.bottom, 28)
-            .listRowSeparator(.hidden)
-            
-            Section {
-                VStack(alignment: .leading, spacing: 16) {
-                    //페페 Log는 전체 페페 데이터를 계산해서 퍼센테이지 등으로 나타내주기
-                    Text("감정 통계")
-                        .font(.title3).fontWeight(.semibold)
-                    LogStatisticsView(pepes: $pepes)
-                }
-            }
-            .padding(.bottom, 28)
-            .listRowSeparator(.hidden)
-            
-            
-            Section {
-                Text("기록")
-                    .font(.title3).fontWeight(.semibold)
-                if logModel.isEmpty {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(lineWidth: 1)
-                        .frame(height: 60)
-                        .overlay {
-                            Text("아직 기록이 없네요!")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundStyle(.secondary)
-                        }
-                } else {
-                    ForEach(logModel) { log in
-                        LogListView(logModel: log)
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button {
-                                    modelContext.delete(log)
-                                } label: {
-                                    // MARK: - 삭제시 삭제 버튼 자연스럽게 만들기
-                                    Text("삭제")
-                                }
-                                .tint(.red)
-                            }
+            List {
+                // 캘린더와 통계
+                Section {
+                    VStack(alignment: .leading, spacing: 16) {
+                        //나의회고 log는 깃헙 잔디 스타일로 수평 스크롤로 구현하기 (단위는 1년 단위)
+                        Text("이만큼 기록했어요!")
+                            .font(.title3).fontWeight(.semibold)
+                        LogCalenderView(pepes: $pepes)
                     }
                 }
+                .padding(.bottom, 28)
+                .listRowSeparator(.hidden)
+                
+                Section {
+                    VStack(alignment: .leading, spacing: 16) {
+                        //페페 Log는 전체 페페 데이터를 계산해서 퍼센테이지 등으로 나타내주기
+                        Text("감정 통계")
+                            .font(.title3).fontWeight(.semibold)
+                        LogStatisticsView(pepes: $pepes)
+                    }
+                }
+                .padding(.bottom, 28)
+                .listRowSeparator(.hidden)
+                
+                
+                Section {
+                    Text("기록")
+                        .font(.title3).fontWeight(.semibold)
+                    if logModel.isEmpty {
+                        Text("아직 기록이 없네요!")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(.secondary)
+                            .frame(alignment: .center)
+                            .listRowSeparator(.hidden)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.top, 24)
+                        
+                    } else {
+                        ForEach(logModel) { log in
+                            LogListView(logModel: log)
+                                .padding(.horizontal, 20)
+                                .listStyle(.plain)
+                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                    Button {
+                                        modelContext.delete(log)
+                                    } label: {
+                                        // MARK: - 삭제시 삭제 버튼 자연스럽게 만들기
+                                        Text("삭제")
+                                    }
+                                    .tint(.red)
+                                }
+                        }
+                    }
+                }
+                
+                
             }
-            .listRowInsets(.init(top: 0, leading: 16, bottom: 12, trailing: 16))
-            .listRowSeparator(.hidden)
-            
-            
+            .listStyle(.plain)
+            .listSectionSpacing(8)  //Section사이의 거리
         }
-        .listStyle(.plain)
-        .listSectionSpacing(8)  //Section사이의 거리
     }
-    
 }
 struct LogCalenderView: View {
     @Binding var pepes: [PepeItem]
-    //    lazyHgrid
-    //    let rows = [GridItem(.fixed(30)), GridItem(.fixed(30))]
-    //    adaptive(minumum: CGFloat, maximum: CGFloat)
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             
-// MARK: - TODO: 피그마로 글자수 -> 거리환산 폼으로 만들어보기 8/14
+            // MARK: - TODO: 피그마로 글자수 -> 거리환산 폼으로 만들어보기 8/14
             RoundedRectangle(cornerRadius: 12.0)
                 .stroke(lineWidth: 1)
                 .frame(height: 160)
@@ -181,21 +200,14 @@ struct LogListView: View {
     }()
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 10)
-            .stroke(lineWidth: 1)             //윤곽선
-            .frame(height: 60)                //크기
-            .overlay(alignment: .leading){    //내부 글자
-                Text("\(logModel.date, formatter: dateFormatter)")
-                    .foregroundColor(.primary)
-                    .padding(.leading, 24)        // 박스 안쪽 여백
-            }.background(
-                NavigationLink("이동", destination: ListDetailView(logModel: logModel))
-                    .opacity(0)
-                    .frame(height: 60)
-            )
+        NavigationLink(destination: ListDetailView(logModel: logModel)) {
+            Text("\(logModel.date, formatter: dateFormatter)")
+                .foregroundColor(.primary)
+            //                    .padding(.horizontal, 24)
+        }
+        
     }
 }
-
 
 #Preview {
     ListView()
