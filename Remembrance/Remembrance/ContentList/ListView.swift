@@ -20,9 +20,14 @@ struct PepeItem: Identifiable {
     var count: Double
     var imageName: String
     var id = UUID()
-    
 }
 
+struct EmojiItem: Identifiable {
+    var type: String
+    var count: Double
+    var imageName: String
+    var id = UUID()
+}
 struct ListView: View {
     @Query private var logModel: [LogModel]
     @Environment(\.modelContext) private var modelContext
@@ -35,12 +40,21 @@ struct ListView: View {
     //    ]
     
     @State private var pepes: [PepeItem] = [
-        PepeItem(type: "허탈", count: 5, imageName: "pepeBlank"),
-        PepeItem(type: "슬픔", count: 4, imageName: "pepeCry"),
-        PepeItem(type: "분노", count: 8, imageName: "pepeFist"),
-        PepeItem(type: "당황", count: 3, imageName: "pepeFlustered"),
-        PepeItem(type: "우울", count: 4, imageName: "pepeGloomy"),
-        PepeItem(type: "행복", count: 4, imageName: "pepeHappy")
+        PepeItem(type: "멍때리는", count: 5, imageName: "pepeBlank"),
+        PepeItem(type: "슬픈", count: 4, imageName: "pepeCry"),
+        PepeItem(type: "분노한", count: 8, imageName: "pepeAngry"),
+        PepeItem(type: "당황한", count: 3, imageName: "pepeFlustered"),
+        PepeItem(type: "우울한", count: 4, imageName: "pepeGloomy"),
+        PepeItem(type: "행복한", count: 4, imageName: "pepeHappy")
+    ]
+    
+    @State private var emojis: [EmojiItem] = [
+        EmojiItem(type: "멍때리는", count: 5, imageName: "emojiBlank"),
+        EmojiItem(type: "슬픈", count: 4, imageName: "emojiCry"),
+        EmojiItem(type: "분노한", count: 8, imageName: "emojiAngry"),
+        EmojiItem(type: "당황한", count: 3, imageName: "emojiFlustered"),
+        EmojiItem(type: "우울한", count: 4, imageName: "emojiGloomy"),
+        EmojiItem(type: "행복한", count: 4, imageName: "emojiHappy")
     ]
     
     var body: some View {
@@ -71,29 +85,37 @@ struct ListView: View {
                 Section {
                     VStack(alignment: .leading, spacing: 16) {
                         //나의회고 log는 깃헙 잔디 스타일로 수평 스크롤로 구현하기 (단위는 1년 단위)
-                        Text("이만큼 기록했어요!")
+                        Text("잔디")
                             .font(.title3).fontWeight(.semibold)
-                        LogCalenderView(pepes: $pepes)
+                        LogCalenderView(emojis: $emojis)
                     }
                 }
                 .padding(.bottom, 28)
                 .listRowSeparator(.hidden)
                 
                 Section {
-                    VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 22) {
                         //페페 Log는 전체 페페 데이터를 계산해서 퍼센테이지 등으로 나타내주기
-                        Text("감정 통계")
+                        Text("이번달은 \(emojis[2].type) 기억이 많네요")
                             .font(.title3).fontWeight(.semibold)
-                        LogStatisticsView(pepes: $pepes)
+                        LogStatisticsView(emojis: $emojis)
                     }
                 }
                 .padding(.bottom, 28)
+                
                 .listRowSeparator(.hidden)
                 
                 
                 Section {
-                    Text("기록")
-                        .font(.title3).fontWeight(.semibold)
+                    HStack{
+                        Text("기록")
+                            .font(.title3).fontWeight(.semibold)
+                            .frame(alignment: .leading)
+                        Spacer()
+                        Image(systemName: "square.and.pencil")
+                            .font(.title3)
+
+                    }
                     if logModel.isEmpty {
                         Text("아직 기록이 없네요!")
                             .font(.system(size: 16, weight: .semibold))
@@ -129,7 +151,9 @@ struct ListView: View {
     }
 }
 struct LogCalenderView: View {
-    @Binding var pepes: [PepeItem]
+//    @Binding var pepes: [PepeItem]
+    @Binding var emojis: [EmojiItem]
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             
@@ -168,24 +192,25 @@ struct LogCalenderView: View {
 
 
 struct LogStatisticsView: View {
-    @Binding var pepes: [PepeItem]
+//    @Binding var pepes: [PepeItem]
+    @Binding var emojis: [EmojiItem]
     
     var body: some View {
-        VStack (alignment: .leading, spacing: 8){
+        VStack (alignment: .leading){
             
-            Chart(pepes) {pepe in
+            Chart(emojis) {emoji in
                 PointMark(
-                    x: .value("Shape Type", pepe.type),
-                    y: .value("Total Count", pepe.count)
+                    x: .value("Shape Type", emoji.type),
+                    y: .value("Total Count", emoji.count)
                 )
                 .symbol {
-                    Image(pepe.imageName) // 막대 아래에 이미지 넣기
+                    Image(emoji.imageName) // 막대 아래에 이미지 넣기
                     //이미지 크기설정
                         .resizable()
                         .scaledToFit()    // 원본 비율 유지해서 맞추기
                         .scaleEffect(0.1) // 50% 크기로 줄임
                 }
-            }
+            }.chartXAxis(.hidden)
             
         }
     }
