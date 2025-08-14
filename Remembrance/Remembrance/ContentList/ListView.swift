@@ -59,27 +59,36 @@ struct ListView: View {
     
     var body: some View {
         VStack{
-            //버튼을 picker로 변경하면됨
-            Button{}
-            label: {
-                HStack(spacing: 14){
-                    Text("8월")
-                        .lineLimit(1)
-                        .font(.largeTitle)
-                    Image(systemName: "chevron.down")
-                }.padding(.horizontal, 10)
-                    .padding(.vertical, 6)
-                    .background(Color.clear)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(.black, lineWidth: 0.5)
-                    )
+            HStack{
+                //버튼을 picker로 변경하면됨
+                Button{}
+                label: {
+                    HStack(spacing: 14){
+                        Text("8월")
+                            .lineLimit(1)
+                            .font(.largeTitle)
+                        Image(systemName: "chevron.down")
+                    }.padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(Color.clear)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.black, lineWidth: 0.5)
+                        )
+                }
+                .buttonStyle(.plain) // 기본 파란색하고 하이라이트 제거
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
+                .padding(.top, 12)
+                .padding(.bottom, 28)
+                
+                Spacer()
+                Image(systemName: "gearshape")
+                    .font(.title3)
+                    .padding(.trailing, 20)
+
+                
             }
-            .buttonStyle(.plain) // 기본 파란색하고 하이라이트 제거
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 20)
-            .padding(.top, 12)
-            .padding(.bottom, 28)
             List {
                 // 캘린더와 통계
                 Section {
