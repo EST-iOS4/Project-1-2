@@ -28,7 +28,7 @@ struct HomeView: View {
                         Image(systemName: "plus")
                     }
                     .tag(1)
-                    
+                
                 SettingView()
                     .tabItem {
                         Image(systemName: "gear")
@@ -36,7 +36,7 @@ struct HomeView: View {
                     }
                     .tag(2)
             }
-          //커스텀네비게이션바 만들어서 월별이동, 현재날짜표시
+            //커스텀네비게이션바 만들어서 월별이동, 현재날짜표시
             .onChange(of: selectedTab) { oldValue, newValue in
                 print("\(oldValue) => \(newValue)")
                 if newValue == 1 {
@@ -45,26 +45,38 @@ struct HomeView: View {
                 }
             }
             .fullScreenCover(isPresented: $showNewPost) {
-              SaveView()
+                SaveView()
             }
-//            .sheet(isPresented: $showNewPost){
-//                SaveView()
-//            }
+            //            .sheet(isPresented: $showNewPost){
+            //                SaveView()
+            //            }
         }
         // MARK: - 이부분 말해보기
-//        .safeAreaInset(edge: .bottom) {
-//            HStack{
-//                Spacer()
-//                Button{}label: {
-//                    Image(systemName: "square.and.pencil")
-//                }
-//                .padding(.trailing, 20)
-//                .foregroundStyle(Color.black)
-//            }
-//            .frame(height: 56)
-//        }
+        .safeAreaInset(edge: .bottom) {
+            NavigationLink(destination: SaveView()) {
+                HStack{
+                    Spacer()
+                    
+                    Button{}label: {
+                        Image(systemName: "square.and.pencil")
+                            .font(.title3)
+                            .padding(.top,10)
+                        //                        .resizable()
+                        //                        .scaledToFit()     원본 비율 유지해서 맞추기
+                    }
+                    
+                    .foregroundStyle(Color.black)
+                }
+                
+                .padding(.trailing, 20)
+                .padding(.bottom, 20)
+                .frame(height: 56)
+                .background(.ultraThinMaterial)
+            }
+        }
     }
 }
+
 
 #Preview {
     HomeView()

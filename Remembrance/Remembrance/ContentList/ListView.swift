@@ -289,7 +289,8 @@ struct HomeHeaderView: View{
                         Image(systemName: "chevron.down").font(.title3)
                     }
                     .padding(.horizontal, 10).padding(.vertical, 6)
-                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(.black, lineWidth: 0.5))
+//                    .background(Color(.systemGray5))
+//                    .cornerRadius(12)
                 }
                 .tint(.primary)
                 .menuIndicator(.hidden)
@@ -316,7 +317,7 @@ struct HomeHeaderView: View{
                 Spacer()
                 HStack{
                     Text("글자가 1cm 라면?")
-                        .font(.title3)/*.fontWeight(.semibold)*/
+                        .font(.title2).fontWeight(.semibold)
                         .foregroundColor(.black)
                 }
             }
@@ -332,7 +333,7 @@ struct HomeHeaderView: View{
         var body: some View{
             VStack(alignment: .leading){
                 Text("이번달은 \(emojis[2].type) 기억이 많네요")
-                    .font(.title3)/*.fontWeight(.semibold)*/
+                    .font(.title2).fontWeight(.semibold)
                     .foregroundColor(.black)
             }
         }
@@ -346,7 +347,7 @@ struct HomeHeaderView: View{
                 Spacer()
                 HStack{
                     Text("기록")
-                        .font(.title).fontWeight(.semibold)
+                        .font(.title).fontWeight(.bold)
                     Spacer()
                     //                Image(systemName: "square.and.pencil")
                     //                    .font(.title)
