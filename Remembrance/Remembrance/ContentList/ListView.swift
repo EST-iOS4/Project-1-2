@@ -12,7 +12,7 @@ import Charts
 
 struct LogItem: Identifiable {
     var id = UUID()
-    var title: String
+    var title: String 
 }
 
 struct PepeItem: Identifiable {
@@ -80,219 +80,74 @@ struct ListView: View {
     
     var body: some View {
         VStack{
-            HStack{
-                //버튼을 picker로 변경하면됨
-                Button{}
-                label: {
-                    HStack(spacing: 14){
-                        Text("8월")
-                            .lineLimit(1)
-                            .font(.largeTitle)
-                        Image(systemName: "chevron.down")
-                    }.padding(.horizontal, 10)
-                        .padding(.vertical, 6)
-                        .background(Color.clear)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(.black, lineWidth: 0.5)
-                        )
-                }
-                .buttonStyle(.plain) // 기본 파란색하고 하이라이트 제거
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 20)
-                .padding(.top, 12)
-                .padding(.bottom, 28)
-                
-                Spacer()
-                Image(systemName: "gearshape")
-                    .font(.title3)
-                    .padding(.trailing, 20)
-
-                
-            }
+            // MARK: 상단
+            HomeHeaderView()
+            // MARK: - 리스트: [섹션]
             List {
-                //회고기록
-                Section(header: LogListHeaderView(showMoreLogs: $showMoreLogs)) {
-//                    HStack{
-//                        Text("기록")
-//                            .font(.title3).fontWeight(.semibold)
-//                            .frame(alignment: .leading)
-//                        Spacer()
-//
-//                        Button(showMoreLogs ? "접기" : "더보기"){
-//                            withAnimation(.easeInOut) { showMoreLogs.toggle() }
-//                        }
-//                        .font(.callout).fontWeight(.semibold)
-//                        .buttonStyle(.plain)
-//                        Image(systemName: "square.and.pencil")
-//                            .font(.title)
-//                    }.frame(maxHeight: .infinity, alignment: .center)
-//                        .padding(.bottom, 28)
-                    
-                    if logModel.isEmpty {
-                        Text("아직 기록이 없네요!")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(.secondary)
-                            .frame(alignment: .center)
-                            .listRowSeparator(.hidden)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            
-                        
-                    } else {
-                        VStack{
-                            Spacer()
-                            HStack{
-                                Spacer()
-                                Button(showMoreLogs ? "접기" : "더보기"){
-                                    withAnimation(.easeInOut) { showMoreLogs.toggle() }
-                                }
-                                .font(.callout).fontWeight(.semibold)
-                                .buttonStyle(.plain)
-                                .frame(width: 50, alignment: .center)
-                            }
-                        }
-                        .listRowSeparator(.hidden)
-                        
-                        let moreLogsShow = showMoreLogs ? logModel : Array(logModel.prefix(3))
-                        ForEach(moreLogsShow) { log in
-                            LogListView(logModel: log)
-                                .listStyle(.plain)
-                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                    Button {
-                                        modelContext.delete(log)
-                                    } label: {
-                                        // MARK: - 삭제시 삭제 버튼 자연스럽게 만들기
-                                        Text("삭제")
-                                    }
-                                    .tint(.red)
-                                }
-                        }
-                    }
-                }
                 
-                // MARK: - 글자수 거리
-                Section(header:LogCalenderHeaderView()){
+                // MARK: - 글자수 뷰 섹션
+                Section{
+                    LogCalenderHeaderView()
                     VStack{
-                        //나의회고 log는 깃헙 잔디 스타일로 수평 스크롤로 구현하기 (단위는 1년 단위)
-                        LogCalenderView(emojis: $emojis,milestones: $milestones)
+                        LogMeterView(emojis: $emojis,milestones: $milestones)
                     }
+                    .padding(.bottom, 28)
                     .frame(maxWidth: .infinity, minHeight: 130)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
                             .fill(.clear),
-                    
+                        
                         alignment: .center
                     )
                 }
                 .listRowSeparator(.hidden)
                 
                 
-                
-                
-                
-                
-                //감정통계
-                Section(header: LogStatisticsHeaderView(emojis: $emojis)) {
-                    
+                // MARK: 감정통계 뷰 섹션
+                Section {
+                    LogStatisticsHeaderView(emojis: $emojis)
                     VStack(alignment: .leading) {
-                        //페페 Log는 전체 페페 데이터를 계산해서 퍼센테이지 등으로 나타내주기
                         LogStatisticsView(emojis: $emojis)
                     }
+                    .padding(.bottom, 20)
                     .listRowSeparator(.hidden)
                     .frame(height: 120)
                 }
                 
                 
                 
-//                //회고기록
-//                Section(header: LogListHeaderView(showMoreLogs: $showMoreLogs)) {
-////                    HStack{
-////                        Text("기록")
-////                            .font(.title3).fontWeight(.semibold)
-////                            .frame(alignment: .leading)
-////                        Spacer()
-////                        
-////                        Button(showMoreLogs ? "접기" : "더보기"){
-////                            withAnimation(.easeInOut) { showMoreLogs.toggle() }
-////                        }
-////                        .font(.callout).fontWeight(.semibold)
-////                        .buttonStyle(.plain)
-////                        Image(systemName: "square.and.pencil")
-////                            .font(.title)
-////                    }.frame(maxHeight: .infinity, alignment: .center)
-////                        .padding(.bottom, 28)
-//                    
-//                    if logModel.isEmpty {
-//                        Text("아직 기록이 없네요!")
-//                            .font(.system(size: 16, weight: .semibold))
-//                            .foregroundStyle(.secondary)
-//                            .frame(alignment: .center)
-//                            .listRowSeparator(.hidden)
-//                            .frame(maxWidth: .infinity, alignment: .center)
-//                            
-//                        
-//                    } else {
-//                        VStack{
-//                            Spacer()
-//                            HStack{
-//                                Spacer()
-//                                Button(showMoreLogs ? "접기" : "더보기"){
-//                                    withAnimation(.easeInOut) { showMoreLogs.toggle() }
-//                                }
-//                                .font(.callout).fontWeight(.semibold)
-//                                .buttonStyle(.plain)
-//                                .frame(width: 50, alignment: .center)
-//                            }
-//                        }
-//                        .listRowSeparator(.hidden)
-//                        
-//                        let moreLogsShow = showMoreLogs ? logModel : Array(logModel.prefix(3))
-//                        ForEach(moreLogsShow) { log in
-//                            LogListView(logModel: log)
-//                                .listStyle(.plain)
-//                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-//                                    Button {
-//                                        modelContext.delete(log)
-//                                    } label: {
-//                                        // MARK: - 삭제시 삭제 버튼 자연스럽게 만들기
-//                                        Text("삭제")
-//                                    }
-//                                    .tint(.red)
-//                                }
-//                        }
-//                    }
-//                }
-                
-                
+                // MARK: - 로그 뷰 섹션
+                Section {
+                    VStack{
+                        LogListHeaderView(showMoreLogs: $showMoreLogs)
+                    }
+                    LogListSectionView(showMoreLogs: $showMoreLogs)
+                }
             }
             .listStyle(.plain)
         }
     }
 }
 
-
-// MARK: - 거리환산 뷰 [섹션]
-
-struct LogCalenderView: View {
-//    @Binding var pepes: [PepeItem]
+// MARK: - 거리환산 뷰
+struct LogMeterView: View {
+    //    @Binding var pepes: [PepeItem]
     @Binding var emojis: [EmojiItem]
     @Binding var milestones: [MileStoneItem]
     var body: some View {
         VStack(alignment: .leading) {
-            
-            // MARK: - 피그마로 글자수 -> 거리환산 폼으로 만들어보기 8/14
             HStack{
                 VStack{
                     if milestones[1].centimeter < 1{
                         Text("현재 \(milestones[1].centimeter) cm 입니다!")
                     }else if milestones[1].centimeter < 100 {
-                        Text("\(milestones[1].centimeter)cm 를 달성하셨네요!")
+                        Text("\(milestones[1].centimeter)cm 를 작성하셨네요!")
                             .font(.body)
                             .padding(.bottom, 6)
                         Text("\(milestones[1].name)")
                             .font(.footnote)
                     }else{
-                        Text("\(milestones[1].meter)를 달성하셨네요!")
+                        Text("\(milestones[1].meter)를 작성하셨네요!")
                             .font(.body)
                             .padding(.bottom, 6)
                         Text("\(milestones[1].name)")
@@ -317,7 +172,7 @@ struct LogCalenderView: View {
                             .resizable()
                             .scaledToFit()    // 원본 비율 유지해서 맞추기
                             .scaleEffect(0.8) // 50% 크기로 줄임
-
+                        
                     }
                 }.frame(maxHeight: .infinity, alignment: .bottomTrailing)
             }
@@ -327,9 +182,9 @@ struct LogCalenderView: View {
 }
 
 
-// MARK: - 그래프 뷰 [섹션]
+// MARK: - 그래프 뷰
 struct LogStatisticsView: View {
-//    @Binding var pepes: [PepeItem]
+    //    @Binding var pepes: [PepeItem]
     @Binding var emojis: [EmojiItem]
     
     var body: some View {
@@ -348,13 +203,50 @@ struct LogStatisticsView: View {
                         .scaleEffect(0.07) // 50% 크기로 줄임
                 }
             }.chartXAxis(.hidden)
-                .padding(.top, 8)
+            //                .padding(.top, 8)
             
         }
     }
 }
 
-// MARK: - 로그 뷰 [섹션]
+// MARK: - 로그 뷰
+
+struct LogListSectionView: View {
+    @Binding var showMoreLogs: Bool
+    @Query private var logModel: [LogModel]
+    @Environment(\.modelContext) private var modelContext
+    
+    var body: some View {
+        if logModel.isEmpty {
+            Text("아직 기록이 없네요!")
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(.secondary)
+                .frame(alignment: .center)
+                .listRowSeparator(.hidden)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding([.top,.bottom], 28)
+            
+            
+        } else {
+            let moreLogsShow = showMoreLogs ? logModel : Array(logModel.prefix(3))
+            ForEach(moreLogsShow) { log in
+                VStack{
+                    LogListView(logModel: log)
+                        .listStyle(.plain)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button {
+                                modelContext.delete(log)
+                            } label: {
+                                Text("삭제")
+                            }
+                            .tint(.red)
+                        }
+                }
+            }
+        }
+    }
+}
+
 struct LogListView: View {
     let logModel: LogModel
     let dateFormatter: DateFormatter = {
@@ -377,50 +269,110 @@ struct LogListView: View {
 
 // MARK: - 섹션별 헤더 뷰
 
-struct LogCalenderHeaderView: View{
+struct HomeHeaderView: View{
+    @State var selectedMonth = ""
+    let months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
     
     var body: some View{
-        VStack(alignment: .leading){
-            Text("글자가 1cm 라면?")
-                .font(.title2).fontWeight(.semibold)
-                .foregroundColor(.black)
-        }
-//        }.padding(.bottom, 16)
-    }
-}
-
-
-struct LogStatisticsHeaderView: View{
-    @Binding var emojis: [EmojiItem]
-    
-    var body: some View{
-        VStack(alignment: .leading){
-            Text("이번달은 \(emojis[2].type) 기억이 많네요")
-                .font(.title2).fontWeight(.semibold)
-                .foregroundColor(.black)
-        }.padding(.bottom, 28)
-    }
-}
-
-struct LogListHeaderView: View {
-    @Binding var showMoreLogs: Bool
-    
-    var body: some View {
-        VStack(alignment: .center){
-            HStack{
-                Text("기록")
-                    .font(.title).fontWeight(.semibold)
+        VStack{
+            Spacer()
+            HStack(alignment: .center){
+                
+                Menu {
+                    ForEach(months, id: \.self) { m in
+                        Button(m) { selectedMonth = m }
+                    }
+                } label: {
+                    HStack(spacing: 14) {
+                        Text(selectedMonth.isEmpty ? months[7] : selectedMonth)
+                            .font(.largeTitle)
+                        Image(systemName: "chevron.down").font(.title3)
+                    }
+                    .padding(.horizontal, 10).padding(.vertical, 6)
+                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(.black, lineWidth: 0.5))
+                }
+                .tint(.primary)
+                .menuIndicator(.hidden)
+       
+                    
+                    Spacer()
+                    
+                    Image(systemName: "gearshape")
+                        .font(.title3)
+                }
                 Spacer()
-                Image(systemName: "square.and.pencil")
-                    .font(.title2)
-            }
-            .foregroundColor(.black)
-        }.padding(.bottom, 12)
+                
+            }.fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 8)
+            
+        }
     }
-}
-
-
-#Preview {
-    ListView()
-}
-
+    
+    struct LogCalenderHeaderView: View{
+        
+        var body: some View{
+            VStack(alignment: .leading){
+                Spacer()
+                HStack{
+                    Text("글자가 1cm 라면?")
+                        .font(.title3)/*.fontWeight(.semibold)*/
+                        .foregroundColor(.black)
+                }
+            }
+            
+            //        }.padding(.bottom, 16)
+        }
+    }
+    
+    
+    struct LogStatisticsHeaderView: View{
+        @Binding var emojis: [EmojiItem]
+        
+        var body: some View{
+            VStack(alignment: .leading){
+                Text("이번달은 \(emojis[2].type) 기억이 많네요")
+                    .font(.title3)/*.fontWeight(.semibold)*/
+                    .foregroundColor(.black)
+            }
+        }
+    }
+    
+    struct LogListHeaderView: View {
+        @Binding var showMoreLogs: Bool
+        @Query private var logModel: [LogModel]
+        var body: some View {
+            VStack{
+                Spacer()
+                HStack{
+                    Text("기록")
+                        .font(.title).fontWeight(.semibold)
+                    Spacer()
+                    //                Image(systemName: "square.and.pencil")
+                    //                    .font(.title)
+                    if logModel.count > 3 {
+                        
+                        
+                        Button(showMoreLogs ? "접기" : "더보기"){
+                            withAnimation(.easeInOut) { showMoreLogs.toggle() }
+                            
+                        }
+                        .font(.callout)
+                        .buttonStyle(.plain)
+                        .opacity(0.6)
+                        
+                    }
+                }
+                Spacer()
+                    .foregroundColor(.black)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal, 20)
+            }
+        }
+    }
+    
+    
+    #Preview {
+        ListView()
+    }
+    

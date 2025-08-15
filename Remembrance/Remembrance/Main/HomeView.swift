@@ -51,6 +51,18 @@ struct HomeView: View {
 //                SaveView()
 //            }
         }
+        // MARK: - 이부분 말해보기
+//        .safeAreaInset(edge: .bottom) {
+//            HStack{
+//                Spacer()
+//                Button{}label: {
+//                    Image(systemName: "square.and.pencil")
+//                }
+//                .padding(.trailing, 20)
+//                .foregroundStyle(Color.black)
+//            }
+//            .frame(height: 56)
+//        }
     }
 }
 
