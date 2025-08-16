@@ -10,11 +10,6 @@ import SwiftData
 import Charts
 
 
-struct LogItem: Identifiable {
-    var id = UUID()
-    var title: String
-}
-
 struct PepeItem: Identifiable {
     var type: String
     var count: Double
@@ -22,12 +17,7 @@ struct PepeItem: Identifiable {
     var id = UUID()
 }
 
-struct EmojiItem: Identifiable {
-    var type: String
-    var count: Double
-    var imageName: String
-    var id = UUID()
-}
+
 
 struct MileStoneItem: Identifiable {
     var id = UUID()
@@ -40,7 +30,9 @@ struct MileStoneItem: Identifiable {
 
 struct ListView: View {
     @Query private var logModel: [LogModel]
+    @Query private var emojis: [EmojiItem]
     @Environment(\.modelContext) private var modelContext
+    
     //    @State private var logs: [LogItem] = [
     //        LogItem(title: "8월 1일 회고"),
     //        LogItem(title: "8월 2일 회고"),
@@ -58,14 +50,7 @@ struct ListView: View {
         .init(type: "행복한", count: 4, imageName: "pepeHappy")
     ]
     
-    @State private var emojis: [EmojiItem] = [
-        .init(type: "멍때리는", count: 5, imageName: "emojiBlank"),
-        .init(type: "슬픈", count: 4, imageName: "emojiCry"),
-        .init(type: "분노한", count: 8, imageName: "emojiAngry"),
-        .init(type: "당황한", count: 3, imageName: "emojiFlustered"),
-        .init(type: "우울한", count: 4, imageName: "emojiGloomy"),
-        .init(type: "행복한", count: 4, imageName: "emojiHappy")
-    ]
+    
     
     @State private var milestones: [MileStoneItem] = [
         .init(name: "", centimeter: 0,meter: "", imageName: "nice"),
@@ -80,7 +65,7 @@ struct ListView: View {
     
     var body: some View {
         VStack{
-            // MARK: 상단
+            // MARK: Body
             // MARK: - 리스트: [섹션]
             List {
                 
@@ -88,25 +73,21 @@ struct ListView: View {
                 Section{
                     LogCalenderHeaderView()
                     VStack{
-                        LogMeterView(emojis: $emojis,milestones: $milestones)
+                        LogMeterView(milestones: $milestones)
                     }
                     .padding(.bottom, 28)
                     .frame(maxWidth: .infinity, minHeight: 130)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(.clear),
-                        
-                        alignment: .center
-                    )
                 }
                 .listRowSeparator(.hidden)
                 
                 
                 // MARK: 감정통계 뷰 섹션
                 Section {
-                    LogStatisticsHeaderView(emojis: $emojis)
+                    VStack{
+                        LogStatisticsHeaderView()
+                    }
                     VStack(alignment: .leading) {
-                        LogStatisticsView(emojis: $emojis)
+                        LogStatisticsView()
                     }
                     .padding(.bottom, 20)
                     .listRowSeparator(.hidden)
@@ -129,15 +110,15 @@ struct ListView: View {
                     .background(.ultraThinMaterial)
                     .overlay(Divider(), alignment: .bottom)
             }
-        } 
+        }
     }
 }
 
 // MARK: - 거리환산 뷰
 struct LogMeterView: View {
     //    @Binding var pepes: [PepeItem]
-    @Binding var emojis: [EmojiItem]
     @Binding var milestones: [MileStoneItem]
+    @Query private var emojis: [EmojiItem]
     var body: some View {
         VStack(alignment: .leading) {
             HStack{
@@ -164,18 +145,18 @@ struct LogMeterView: View {
                     if milestones[1].centimeter < 1{
                         Image(milestones[1].imageName)
                             .resizable()
-                            .scaledToFit()    // 원본 비율 유지해서 맞추기
-                            .scaleEffect(0.8) // 50% 크기로 줄임
+                            .scaledToFit()
+                            .scaleEffect(0.8)
                     }else if milestones[1].centimeter < 100 {
                         Image(milestones[1].imageName)
                             .resizable()
-                            .scaledToFit()    // 원본 비율 유지해서 맞추기
-                            .scaleEffect(0.8) // 50% 크기로 줄임
+                            .scaledToFit()
+                            .scaleEffect(0.8)
                     }else{
                         Image(milestones[1].imageName)
                             .resizable()
-                            .scaledToFit()    // 원본 비율 유지해서 맞추기
-                            .scaleEffect(0.8) // 50% 크기로 줄임
+                            .scaledToFit()
+                            .scaleEffect(0.8)
                         
                     }
                 }.frame(maxHeight: .infinity, alignment: .bottomTrailing)
@@ -189,26 +170,32 @@ struct LogMeterView: View {
 // MARK: - 그래프 뷰
 struct LogStatisticsView: View {
     //    @Binding var pepes: [PepeItem]
-    @Binding var emojis: [EmojiItem]
+    @Query private var emojis: [EmojiItem]
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
+        let hasAnyCount = emojis.contains { $0.count > 0 }
+        
         VStack (alignment: .leading){
-            
-            Chart(emojis) {emoji in
-                PointMark(
-                    x: .value("Shape Type", emoji.type),
-                    y: .value("Total Count", emoji.count)
-                )
-                .symbol {
-                    Image(emoji.imageName) // 막대 아래에 이미지 넣기
-                    //이미지 크기설정
-                        .resizable()
-                        .scaledToFit()    // 원본 비율 유지해서 맞추기
-                        .scaleEffect(0.07) // 50% 크기로 줄임
-                }
-            }.chartXAxis(.hidden)
-            //                .padding(.top, 8)
-            
+            if hasAnyCount {
+                Chart(emojis) {emoji in
+                    PointMark(
+                        x: .value("Shape Type", emoji.type),
+                        y: .value("Total Count", emoji.count)
+                    )
+                    .symbol {
+                        Image(emoji.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(0.07)
+                    }
+                }.chartXAxis(.hidden)
+            } else{
+                Text("아직 데이터가 없어요. \n오른쪽 상단 버튼으로 기록해보세요.")
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, minHeight: 160)
+                    .multilineTextAlignment(.center)
+            }
         }
     }
 }
@@ -251,6 +238,7 @@ struct LogListSectionView: View {
     }
 }
 
+// MARK: - 한개의 로그리스트 뷰
 struct LogListView: View {
     let logModel: LogModel
     let dateFormatter: DateFormatter = {
@@ -273,44 +261,143 @@ struct LogListView: View {
 
 // MARK: - 섹션별 헤더 뷰
 
+
+
+
+
+// MARK: - 메인 헤더
 struct HomeHeaderView: View{
-    @State var selectedMonth = ""
-    let months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+    @State private var selectedYear = "2025"
+    @State private var selectedMonth = "8"
+    @State private var showPopover = false
+    @Query private var emojis: [EmojiItem]
+    @Environment(\.modelContext) private var modelContext
+    @State private var showSave = false
     
     var body: some View{
-            
-            HStack(){
-                
-                Menu {
-                    ForEach(months, id: \.self) { m in
-                        Button(m) { selectedMonth = m }
-                    }
-                } label: {
-                    HStack() {
-                        Text(selectedMonth.isEmpty ? months[7] : selectedMonth)
-                            .font(.largeTitle)
-                        Image(systemName: "chevron.down").font(.title3)
-                    }
+        
+        HStack {
+            Button {
+                showPopover.toggle()
+            } label: {
+                HStack(spacing: 6) {
+                    Text("\(selectedMonth)월")
+                        .font(.largeTitle)
                     
-                    //                    .cornerRadius(12)
+                    Image(systemName: "chevron.down")
+                        .font(.title3)
+                        .rotationEffect(.degrees(showPopover ? 180 : 0))
+                        .animation(.easeInOut(duration: 0.2), value: showPopover)
                 }
-                .tint(.primary)
-                .menuIndicator(.hidden)
-                
-                
-                Spacer()
-                
-                Image(systemName: "gearshape")
-                    .font(.title3)
-                
             }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 12)
+            .foregroundColor(.primary)
+            .fontWeight(.bold)
+            .overlay(alignment: .bottomLeading) {
+                Color.clear
+                    .frame(width: 1, height: 1)
+                    .offset(x: 18, y: 36)
+                    .popover(isPresented: $showPopover,
+                             attachmentAnchor: .rect(.bounds),
+                             arrowEdge: .top) {
+                        YearMonthPicker(
+                            selectedYear: $selectedYear,
+                            selectedMonth: $selectedMonth,
+                            onDone: { showPopover = false }
+                        )
+                        .frame(width: 320, height: 220)
+                        .presentationCompactAdaptation(.none)
+                        .padding(.top, 12)
+                    }
+            }
             
-
+            Spacer()
+            //그래프 테스트
+            //            Button {
+            //                incrementEmojiCounts()
+            //            } label: {
+            //                Image(systemName: "plus.circle.fill")
+            //                    .font(.title3)
+            //            }
+            
+            
+            Image(systemName: "gearshape")
+                .font(.title3)
+            
+            
+            
+            Button { showSave = true } label: {
+                Image(systemName: "pencil.line")
+                    .font(.title3)
+            }
+            .padding(.leading, 8)
+            .foregroundColor(.primary)
+            
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
+        
+        .sheet(isPresented: $showSave) {
+            SaveView()
+        }
+        
+        
+    }
+    //그래프 테스트
+    //    private func incrementEmojiCounts() {
+    //        for emoji in emojis {
+    //            emoji.count += 1
+    //        }
+    //        try? modelContext.save()
+    //    }
+}
+// MARK: - 월피커
+struct YearMonthPicker: View {
+    @Binding var selectedYear: String
+    @Binding var selectedMonth: String
+    var onDone: (() -> Void)? = nil
+    
+    let years = (2000...2035).map { String($0) }
+    let months = (1...12).map { String($0) }
+    @State private var show = false
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            
+            HStack{
+                Text("연/월 선택")
+                    .font(.headline)
+                Spacer()
+                Button("완료") { onDone?() }
+                    .buttonStyle(.automatic)
+            }
+            
+            
+            
+            HStack {
+                Picker("Year", selection: $selectedYear) {
+                    ForEach(years, id: \.self) { year in
+                        Text("\(year)년")
+                            .tag(year)
+                    }
+                }
+                .pickerStyle(.wheel)
+                
+                Picker("Month", selection: $selectedMonth) {
+                    ForEach(months, id: \.self) { Text("\($0)월").tag($0) }
+                }
+                .pickerStyle(.wheel)
+            }
+            .frame(height: 180)
+            
+            
+        }
+        
+        .padding()
+        .frame(width: 320) // 팝오버 크기
+        .presentationCompactAdaptation(.none) // ← 아이폰에서도 팝오버 유지 (iOS17+)
     }
 }
-
+// MARK: - 글자수환산 헤더
 struct LogCalenderHeaderView: View{
     
     var body: some View{
@@ -322,24 +409,27 @@ struct LogCalenderHeaderView: View{
                     .foregroundColor(.black)
             }
         }
-        
-        //        }.padding(.bottom, 16)
     }
 }
 
-
+// MARK: - 그래프 헤더
 struct LogStatisticsHeaderView: View{
-    @Binding var emojis: [EmojiItem]
+    @Query private var emojis: [EmojiItem]
     
-    var body: some View{
-        VStack(alignment: .leading){
-            Text("이번달은 \(emojis[2].type) 기억이 많네요")
-                .font(.title2).fontWeight(.semibold)
-                .foregroundColor(.black)
+    var body: some View {
+        let hasAnyCount = emojis.contains { $0.count > 0 }
+        if hasAnyCount,
+           let top = emojis.max(by: { $0.count < $1.count }),
+           top.count > 0 {
+            Text("이번달은 \(top.type) 기억이 많네요")
+        } else {
+            Text("이번달 기분을 기록해볼까요?")
         }
+        
     }
 }
 
+// MARK: - 로그리스트 헤더
 struct LogListHeaderView: View {
     @Binding var showMoreLogs: Bool
     @Query private var logModel: [LogModel]
@@ -377,4 +467,3 @@ struct LogListHeaderView: View {
 #Preview {
     ListView()
 }
-

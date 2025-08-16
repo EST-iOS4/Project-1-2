@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
-    
     @State private var selectedTab: Int = 0
     @State private var showNewPost: Bool = false
     
@@ -51,8 +50,13 @@ struct HomeView: View {
             //                SaveView()
             //            }
         }
+        .task {
+            // 앱 첫 진입 시 1회 시드
+            try? seedEmojisIfNeeded(context: modelContext)
+        }
     }
 }
+
 
 
 #Preview {
