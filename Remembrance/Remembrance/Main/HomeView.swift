@@ -12,6 +12,7 @@ struct HomeView: View {
     
     @State private var selectedTab: Int = 0
     @State private var showNewPost: Bool = false
+    @State private var showSettingView: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -29,13 +30,15 @@ struct HomeView: View {
                     }
                     .tag(1)
                     
-                SettingView()
+//                SettingView()
+              Text("Setting")
                     .tabItem {
                         Image(systemName: "gear")
-                        Text("Setting")
+                       
                     }
                     .tag(2)
             }
+            
           //커스텀네비게이션바 만들어서 월별이동, 현재날짜표시
             .navigationTitle("AUGUST")
             .onChange(of: selectedTab) { oldValue, newValue in
@@ -51,7 +54,11 @@ struct HomeView: View {
 //            .sheet(isPresented: $showNewPost){
 //                SaveView()
 //            }
-        }
+        }.sheet(isPresented: $showSettingView, content: {
+          SettingView()
+            .presentationDetents([.height(600)])
+            .presentationBackground(Color.black.opacity(0.4))
+        })
     }
 }
 
