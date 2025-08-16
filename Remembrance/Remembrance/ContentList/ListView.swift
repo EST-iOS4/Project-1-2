@@ -12,7 +12,7 @@ import Charts
 
 struct LogItem: Identifiable {
     var id = UUID()
-    var title: String 
+    var title: String
 }
 
 struct PepeItem: Identifiable {
@@ -81,7 +81,6 @@ struct ListView: View {
     var body: some View {
         VStack{
             // MARK: 상단
-            HomeHeaderView()
             // MARK: - 리스트: [섹션]
             List {
                 
@@ -125,7 +124,12 @@ struct ListView: View {
                 }
             }
             .listStyle(.plain)
-        }
+            .safeAreaInset(edge: .top) {
+                HomeHeaderView()
+                    .background(.ultraThinMaterial)
+                    .overlay(Divider(), alignment: .bottom)
+            }
+        } 
     }
 }
 
@@ -176,7 +180,7 @@ struct LogMeterView: View {
                     }
                 }.frame(maxHeight: .infinity, alignment: .bottomTrailing)
             }
-        }.background(Color(.systemGray5))
+        }.background(Color(.systemGray4))
             .cornerRadius(12)
     }
 }
@@ -274,106 +278,103 @@ struct HomeHeaderView: View{
     let months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
     
     var body: some View{
-        VStack{
-            Spacer()
-            HStack(alignment: .center){
+            
+            HStack(){
                 
                 Menu {
                     ForEach(months, id: \.self) { m in
                         Button(m) { selectedMonth = m }
                     }
                 } label: {
-                    HStack(spacing: 14) {
+                    HStack() {
                         Text(selectedMonth.isEmpty ? months[7] : selectedMonth)
                             .font(.largeTitle)
                         Image(systemName: "chevron.down").font(.title3)
                     }
-                    .padding(.horizontal, 10).padding(.vertical, 6)
-//                    .background(Color(.systemGray5))
-//                    .cornerRadius(12)
+                    
+                    //                    .cornerRadius(12)
                 }
                 .tint(.primary)
                 .menuIndicator(.hidden)
-       
-                    
-                    Spacer()
-                    
-                    Image(systemName: "gearshape")
-                        .font(.title3)
-                }
+                
+                
                 Spacer()
                 
-            }.fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal, 20)
-                .padding(.bottom, 8)
-            
-        }
-    }
-    
-    struct LogCalenderHeaderView: View{
-        
-        var body: some View{
-            VStack(alignment: .leading){
-                Spacer()
-                HStack{
-                    Text("글자가 1cm 라면?")
-                        .font(.title2).fontWeight(.semibold)
-                        .foregroundColor(.black)
-                }
+                Image(systemName: "gearshape")
+                    .font(.title3)
+                
             }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 12)
             
-            //        }.padding(.bottom, 16)
-        }
+
     }
+}
+
+struct LogCalenderHeaderView: View{
     
-    
-    struct LogStatisticsHeaderView: View{
-        @Binding var emojis: [EmojiItem]
-        
-        var body: some View{
-            VStack(alignment: .leading){
-                Text("이번달은 \(emojis[2].type) 기억이 많네요")
+    var body: some View{
+        VStack(alignment: .leading){
+            Spacer()
+            HStack{
+                Text("글자가 1cm 라면?")
                     .font(.title2).fontWeight(.semibold)
                     .foregroundColor(.black)
             }
         }
+        
+        //        }.padding(.bottom, 16)
     }
+}
+
+
+struct LogStatisticsHeaderView: View{
+    @Binding var emojis: [EmojiItem]
     
-    struct LogListHeaderView: View {
-        @Binding var showMoreLogs: Bool
-        @Query private var logModel: [LogModel]
-        var body: some View {
-            VStack{
-                Spacer()
-                HStack{
-                    Text("기록")
-                        .font(.title).fontWeight(.bold)
-                    Spacer()
-                    //                Image(systemName: "square.and.pencil")
-                    //                    .font(.title)
-                    if logModel.count > 3 {
-                        
-                        
-                        Button(showMoreLogs ? "접기" : "더보기"){
-                            withAnimation(.easeInOut) { showMoreLogs.toggle() }
-                            
-                        }
-                        .font(.callout)
-                        .buttonStyle(.plain)
-                        .opacity(0.6)
-                        
-                    }
-                }
-                Spacer()
-                    .foregroundColor(.black)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.horizontal, 20)
-            }
+    var body: some View{
+        VStack(alignment: .leading){
+            Text("이번달은 \(emojis[2].type) 기억이 많네요")
+                .font(.title2).fontWeight(.semibold)
+                .foregroundColor(.black)
         }
     }
-    
-    
-    #Preview {
-        ListView()
+}
+
+struct LogListHeaderView: View {
+    @Binding var showMoreLogs: Bool
+    @Query private var logModel: [LogModel]
+    var body: some View {
+        VStack{
+            Spacer()
+            HStack{
+                Text("기록")
+                    .font(.title).fontWeight(.bold)
+                Spacer()
+                //                Image(systemName: "square.and.pencil")
+                //                    .font(.title)
+                if logModel.count > 3 {
+                    
+                    
+                    Button(showMoreLogs ? "접기" : "더보기"){
+                        withAnimation(.easeInOut) { showMoreLogs.toggle() }
+                        
+                    }
+                    .font(.callout)
+                    .buttonStyle(.plain)
+                    .opacity(0.6)
+                    
+                }
+            }
+            Spacer()
+                .foregroundColor(.black)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 20)
+        }
     }
-    
+}
+
+
+#Preview {
+    ListView()
+}
+
