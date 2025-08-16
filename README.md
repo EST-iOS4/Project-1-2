@@ -41,7 +41,8 @@ macOS는 지원하지 않습니다.
 # 개발환경
 ---
 # 폴더구조
-```PlainText
+<pre lang="markdown">
+```
 Remembrance
 ├── Model
 │   ├── EmojisSeed.swift
@@ -66,3 +67,4 @@ Remembrance
 │
 └── Assets
 ```
+</pre>
