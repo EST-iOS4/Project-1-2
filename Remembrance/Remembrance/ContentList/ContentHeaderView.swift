@@ -8,8 +8,15 @@ import SwiftUI
 import SwiftData
 
 struct ContentHeaderView: View{
-    @State private var selectedYear = "2025"
-    @State private var selectedMonth = "8"
+    @State private var selectedYear: String
+        @State private var selectedMonth: String
+
+        init() {
+            let today = Date()
+            let calendar = Calendar.current
+            _selectedYear = State(initialValue: String(calendar.component(.year, from: today)))
+            _selectedMonth = State(initialValue: String(calendar.component(.month, from: today)))
+        }
     @State private var showPopover = false
     @Query private var emojis: [EmojiItem]
     @Environment(\.modelContext) private var modelContext

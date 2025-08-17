@@ -19,7 +19,7 @@ struct PepeItem: Identifiable {
 
 
 
-struct MileStoneItem: Identifiable {
+struct MilestoneItem: Identifiable {
     var id = UUID()
     var name: String
     var centimeter: Int
@@ -52,7 +52,7 @@ struct ContentListView: View {
     
     
     
-    @State private var milestones: [MileStoneItem] = [
+    @State private var milestones: [MilestoneItem] = [
         .init(name: "", centimeter: 0,meter: "", imageName: "nice"),
         .init(name: "피카츄 2.5마리를\n가로로 눕혀 놓은 길이에요!", centimeter: 500,meter: "5m", imageName: "pika"),
         .init(name: "돼지고기 삼겹살 약 60줄 줄 세운 길이에요!", centimeter: 1000,meter: "10m", imageName: "sam"),

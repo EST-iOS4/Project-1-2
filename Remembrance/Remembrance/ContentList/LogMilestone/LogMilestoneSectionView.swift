@@ -9,7 +9,7 @@ import SwiftData
 
 struct LogMilestoneSectionView: View {
     //    @Binding var pepes: [PepeItem]
-    @Binding var milestones: [MileStoneItem]
+    @Binding var milestones: [MilestoneItem]
     @Query private var emojis: [EmojiItem]
     var body: some View {
         VStack(alignment: .leading) {
