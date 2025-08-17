@@ -14,11 +14,13 @@ struct HomeView: View {
     @State private var showSettingView: Bool = false
     
     var body: some View {
-        VStack {
-            ContentListView()
-        }.task {
-            // 앱 첫 진입 시 1회 시드
-            try? seedEmojisIfNeeded(context: modelContext)
+        NavigationStack {
+            VStack {
+                ContentListView()
+            }.task {
+                // 앱 첫 진입 시 1회 시드
+                try? seedEmojisIfNeeded(context: modelContext)
+            }
         }
     }
 }

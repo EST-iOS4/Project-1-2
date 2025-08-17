@@ -7,15 +7,38 @@
 import SwiftUI
 import SwiftData
 
-struct ContentHeaderView: View{
+//struct ContentHeaderView: View{
+//    @State private var selectedYear: String
+//    @State private var selectedMonth: String
+//    
+//    init() {
+//        let today = Date()
+//        let calendar = Calendar.current
+//        _selectedYear = State(initialValue: String(calendar.component(.year, from: today)))
+//        _selectedMonth = State(initialValue: String(calendar.component(.month, from: today)))
+//    }
+
+struct ContentHeaderView: View {
+    @Binding var selectedDate: Date
     @State private var selectedYear: String
     @State private var selectedMonth: String
-    
-    init() {
-        let today = Date()
-        let calendar = Calendar.current
-        _selectedYear = State(initialValue: String(calendar.component(.year, from: today)))
-        _selectedMonth = State(initialValue: String(calendar.component(.month, from: today)))
+
+    init(selectedDate: Binding<Date>) {
+        self._selectedDate = selectedDate
+        let d = selectedDate.wrappedValue
+        let cal = Calendar.current
+        _selectedYear  = State(initialValue: String(cal.component(.year,  from: d)))
+        _selectedMonth = State(initialValue: String(cal.component(.month, from: d)))
+    }
+
+    private func applySelectionToDate() {
+        var comps = DateComponents()
+        comps.year = Int(selectedYear)
+        comps.month = Int(selectedMonth)
+        comps.day = 1
+        if let newDate = Calendar.current.date(from: comps) {
+            selectedDate = newDate
+        }
     }
     
     @State private var showPopover = false
@@ -24,8 +47,7 @@ struct ContentHeaderView: View{
     @State private var showNewLogView = false
     @State private var showSettingView: Bool = false
     
-    var body: some View{
-        
+    var body: some View {
         HStack {
             Button {
                 showPopover.toggle()
@@ -91,6 +113,8 @@ struct ContentHeaderView: View{
                 .presentationDetents([.height(600)])
                 .presentationBackground(Color.clear)
         })
-        
+        // 연/월 값이 바뀌면 selectedDate 갱신
+        .onChange(of: selectedYear) { _, _ in applySelectionToDate() }
+        .onChange(of: selectedMonth) { _, _ in applySelectionToDate() }
     }
 }

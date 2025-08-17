@@ -29,7 +29,18 @@ struct MilestoneItem: Identifiable {
 
 
 struct ContentListView: View {
-    @Query private var logModel: [LogModel]
+    @State private var selectedDate: Date = Date()
+    @Query private var logModel: [LogModel]   // 그대로 둡니다.
+
+    private var monthLogs: [LogModel] {
+        let cal = Calendar.current
+        let start = cal.date(from: cal.dateComponents([.year, .month], from: selectedDate))!
+        let next  = cal.date(byAdding: .month, value: 1, to: start)!
+        return logModel
+            .filter { $0.date >= start && $0.date < next }
+            .sorted { $0.date > $1.date }   // 최신순(선택사항)
+    }
+
     @Query private var emojis: [EmojiItem]
     @Environment(\.modelContext) private var modelContext
     
@@ -91,12 +102,12 @@ struct ContentListView: View {
                     VStack{
                         LogListHeaderView(showMoreLogs: $showMoreLogs)
                     }
-                    LogListSectionView(showMoreLogs: $showMoreLogs)
+                    LogListSectionView(logs: monthLogs, showMoreLogs: $showMoreLogs)
                 }
             }
             .listStyle(.plain)
             .safeAreaInset(edge: .top) {
-                ContentHeaderView()
+                ContentHeaderView(selectedDate: $selectedDate)
                     .background(.ultraThinMaterial)
                     .overlay(Divider(), alignment: .bottom)
             }

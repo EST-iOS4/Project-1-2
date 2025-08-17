@@ -8,12 +8,12 @@ import SwiftUI
 import SwiftData
 
 struct LogListSectionView: View {
+    let logs: [LogModel]
     @Binding var showMoreLogs: Bool
-    @Query private var logModel: [LogModel]
     @Environment(\.modelContext) private var modelContext
     
     var body: some View {
-        if logModel.isEmpty {
+        if logs.isEmpty {
             Text("아직 기록이 없네요!")
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundStyle(.secondary)
@@ -21,12 +21,11 @@ struct LogListSectionView: View {
                 .listRowSeparator(.hidden)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding([.top,.bottom], 28)
-            
-            
         } else {
-            let moreLogsShow = showMoreLogs ? logModel : Array(logModel.prefix(3))
-            ForEach(moreLogsShow) { log in
-                VStack{
+            // 필요 시 더보기 로직
+            let showing = showMoreLogs ? logs : Array(logs.prefix(3))
+            ForEach(showing) { log in
+                VStack {
                     LogRowView(logModel: log)
                         .listStyle(.plain)
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {

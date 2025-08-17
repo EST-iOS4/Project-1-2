@@ -72,17 +72,12 @@ struct ListDetailView: View {
               // TODO: 내용 TextEditor 200자 제한, 글씨 수 셀 수 있는 로직 추가하기
               // TODO: 프레임을 동적으로 적용할 수 있도록 고려하기 (아이패드도 지원해야 함)
             }
-            .frame(width: .infinity, height: .infinity)
+            .frame(maxWidth: .infinity, minHeight: 90)
             .foregroundStyle(Color.gray.opacity(0.3))
           
         }
       }
       .padding(20)
-      .toolbar {
-        ToolbarItem(placement: .topBarLeading) {
-          Image(systemName: "chevron.left")
-        }
-      }
     }
   }
 }
