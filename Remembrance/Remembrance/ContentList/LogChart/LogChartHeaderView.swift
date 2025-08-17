@@ -17,8 +17,10 @@ struct LogChartHeaderView: View{
            let top = emojis.max(by: { $0.count < $1.count }),
            top.count > 0 {
             Text("이번달은 \(top.type) 기억이 많네요")
+                .font(.title2).fontWeight(.semibold)
         } else {
             Text("이번달 기분을 기록해볼까요?")
+                .font(.title2).fontWeight(.semibold)
         }
         
     }
