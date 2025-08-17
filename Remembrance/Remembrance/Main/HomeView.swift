@@ -16,6 +16,9 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
+          Button("Setting") {
+            showSettingView.toggle()
+          }
             TabView(selection: $selectedTab) {
                 ListView()
                     .tabItem {
@@ -29,14 +32,6 @@ struct HomeView: View {
                         Image(systemName: "plus")
                     }
                     .tag(1)
-                    
-//                SettingView()
-              Text("Setting")
-                    .tabItem {
-                        Image(systemName: "gear")
-                       
-                    }
-                    .tag(2)
             }
             
           //커스텀네비게이션바 만들어서 월별이동, 현재날짜표시
@@ -57,7 +52,7 @@ struct HomeView: View {
         }.sheet(isPresented: $showSettingView, content: {
           SettingView()
             .presentationDetents([.height(600)])
-            .presentationBackground(Color.black.opacity(0.4))
+            .presentationBackground(Color.clear)
         })
     }
 }

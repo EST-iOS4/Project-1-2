@@ -6,70 +6,95 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SettingView: View {
+  @Environment(\.dismiss) var dismiss
   @Environment(\.colorScheme) private var scheme
   @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
-  @Namespace private var animation
-  @State var currentTheme = Color.orange
+  @AppStorage("currentTheme") private var currentTheme: String?
+//  @AppStorage("userTheme") private var currentTheme: Color =
+//  @Environment(\.modelContext) var modelContext
+//  @Query private var logContext: [ThemeModel]
+//  @State var currentTheme : String?
   @State var themeText = ""
+//  let themeModel: ThemeModel
   
   var body: some View {
-    VStack (alignment: .leading){
-      HStack {
-        Text("설정").font(.title).bold()
-        Spacer()
-        Button {
-          // 글씨크기, 테마 정보 저장 하기
-        } label: {
-          RoundedRectangle(cornerRadius: 8)
-            .fill(Color.green)
-            .overlay {
-              Text("완료")
-                .foregroundStyle(.white)
-            }
-            .frame(width: 50, height: 30)
-        }
-      }
-      .padding(.bottom, 28)
-      
-      //폰트사이즈
-      VStack (alignment: .leading, spacing: 16){
-        Text("폰트사이즈").font(.title3).bold()
+    VStack {
+      VStack {
         HStack {
-          Text("가")
-          Slider(value: .constant(10), in: 1...100)
-          Text("가")
-        }
-        .frame(width: .infinity,height: 50)
-        .padding(.bottom, 28)
-      }
-      
-      //테마
-      VStack (alignment: .leading, spacing: 16){
-        Text("테마").font(.title3).bold()
-        
-        VStack (spacing: 16){
-          Picker("", selection: $currentTheme) {
-            Text("Orange").tag(Color.orange)
-            Text("Pink").tag(Color.pink)
-            Text("Purple").tag(Color.purple)
+          Text("설정").font(.title).bold()
+          Spacer()
+          Button {
+            // 글씨크기, 테마 정보 저장 하기
+            //UserDefaults.standard.set(currentTheme, forKey: "currentTheme")
+            
+            dismiss()
+          } label: {
+            RoundedRectangle(cornerRadius: 8)
+              .fill(Color.green)
+              .overlay {
+                Text("완료")
+                  .foregroundStyle(.white)
+              }
+              .frame(width: 50, height: 30)
           }
-          .pickerStyle(.segmented)
-          RoundedRectangle(cornerRadius: 15)
-            .fill(currentTheme)
-            .frame(width: 150, height: 250)
-          Text("\(themeText)")
+        }
+        .padding(.bottom, 28)
+        
+        //폰트사이즈
+        VStack (alignment: .leading, spacing: 16){
+          Text("폰트사이즈").font(.title3).bold()
+          HStack {
+            Text("가")
+            Slider(value: .constant(10), in: 1...100)
+            Text("가")
+          }
+          .frame(width: .infinity,height: 50)
         }
         
-        .onChange(of: currentTheme, initial: true) {
-          themeText = "현재 테마는 \(self.currentTheme) 입니다"
+        //테마
+        VStack (alignment: .leading, spacing: 16){
+          Text("테마").font(.title3).bold()
+          
+          VStack (spacing: 16){
+            Picker("", selection: $currentTheme) {
+              Text("기본").tag("기본")
+              Text("페페").tag("페페")
+              Text("블러썸").tag("블러썸")
+            }
+            .pickerStyle(.segmented)
+            Image(currentTheme ?? "기본")
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .clipped()
+              .frame(width: 200, height: 200)
+              .border(Color.gray)
+//            RoundedRectangle(cornerRadius: 15)
+//              .frame(width: 150, height: 250)
+            Text("\(themeText)")
+          }
+          
+          .onChange(of: currentTheme, initial: true) {
+            themeText = "현재 테마는 \(self.currentTheme ?? "기본") 입니다"
+            UserDefaults.standard.set(currentTheme, forKey: "currentTheme")
+          }
         }
+        
       }
-      
     }
-    .frame(width: .infinity, height: 600)
     .padding(20)
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .frame(width: 370, height: 600)
+    .background(.themeBG)
+    .clipShape(.rect(cornerRadius: 30))
+//    .onAppear() {
+////      if UserDefaults.standard.string(forKey: "currentTheme") == nil {
+////        currentTheme = "기본"
+////      }
+//      currentTheme = UserDefaults.standard.string(forKey: "currentTheme") == nil ? "기본" : UserDefaults.standard.string(forKey: "currentTheme")
+//    }
   }
 }
 
@@ -80,28 +105,14 @@ struct SettingView: View {
 
 enum Theme: String, CaseIterable {
   case systemDefault = "Default"
-  case light = "Light"
-  case dark = "Dark"
+//  case defaultEmoji = "기본"
+//  case pepeEmoji = "페페"
   
-  func color(_ scheme: ColorScheme) -> Color {
-    switch self {
-    case .systemDefault:
-      return scheme == .dark ? .moon : .sun
-    case .light:
-      return .sun
-    case .dark:
-      return .moon
-    }
-  }
   
   var colorScheme: ColorScheme? {
     switch self {
     case .systemDefault:
       return nil
-    case .light:
-      return .light
-    case .dark:
-      return .dark
     }
   }
 }

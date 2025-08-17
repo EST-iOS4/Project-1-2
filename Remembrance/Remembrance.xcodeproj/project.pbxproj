@@ -16,6 +16,7 @@
 		350690982E49C658008FED38 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690972E49C658008FED38 /* ListView.swift */; };
 		3506909A2E49CF17008FED38 /* ListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690992E49CF17008FED38 /* ListDetailView.swift */; };
 		350690C72E4C1CB8008FED38 /* LogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690C52E4C1CB8008FED38 /* LogModel.swift */; };
+		69828C4B2E515E7400DA9287 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69828C4A2E515E6900DA9287 /* ThemeModel.swift */; };
 		6B90391D2E4AD57C006ED1DA /* SaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B90391C2E4AD57C006ED1DA /* SaveView.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		350690972E49C658008FED38 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		350690992E49CF17008FED38 /* ListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailView.swift; sourceTree = "<group>"; };
 		350690C52E4C1CB8008FED38 /* LogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogModel.swift; sourceTree = "<group>"; };
+		69828C4A2E515E6900DA9287 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		6B90391C2E4AD57C006ED1DA /* SaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 		350690C62E4C1CB8008FED38 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				69828C4A2E515E6900DA9287 /* ThemeModel.swift */,
 				350690C52E4C1CB8008FED38 /* LogModel.swift */,
 			);
 			path = Model;
@@ -204,6 +207,7 @@
 				6B90391D2E4AD57C006ED1DA /* SaveView.swift in Sources */,
 				350690872E49AD5B008FED38 /* HomeView.swift in Sources */,
 				350690902E49BB53008FED38 /* OnBoardingView.swift in Sources */,
+				69828C4B2E515E7400DA9287 /* ThemeModel.swift in Sources */,
 				350690882E49AD5B008FED38 /* RemembranceApp.swift in Sources */,
 				3506909A2E49CF17008FED38 /* ListDetailView.swift in Sources */,
 			);
