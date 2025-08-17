@@ -30,7 +30,7 @@ struct MilestoneItem: Identifiable {
 
 struct ContentListView: View {
     @State private var selectedDate: Date = Date()
-    @Query private var logModel: [LogModel]   // 그대로 둡니다.
+    @Query private var logModel: [LogModel]
 
     private var monthLogs: [LogModel] {
         let cal = Calendar.current
@@ -38,7 +38,7 @@ struct ContentListView: View {
         let next  = cal.date(byAdding: .month, value: 1, to: start)!
         return logModel
             .filter { $0.date >= start && $0.date < next }
-            .sorted { $0.date > $1.date }   // 최신순(선택사항)
+            .sorted { $0.date > $1.date }   
     }
 
     @Query private var emojis: [EmojiItem]
