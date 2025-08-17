@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import Charts
+
 struct LogChartHeaderView: View{
     @Query private var emojis: [EmojiItem]
     

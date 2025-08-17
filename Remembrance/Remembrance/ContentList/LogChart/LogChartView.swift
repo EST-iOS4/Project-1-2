@@ -9,7 +9,6 @@ import SwiftData
 import Charts
 
 struct LogChartView: View {
-    //    @Binding var pepes: [PepeItem]
     @Query private var emojis: [EmojiItem]
     @Environment(\.modelContext) private var modelContext
     

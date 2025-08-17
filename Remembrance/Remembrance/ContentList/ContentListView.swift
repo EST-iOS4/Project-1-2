@@ -33,14 +33,6 @@ struct ContentListView: View {
     @Query private var emojis: [EmojiItem]
     @Environment(\.modelContext) private var modelContext
     
-    //    @State private var logs: [LogItem] = [
-    //        LogItem(title: "8월 1일 회고"),
-    //        LogItem(title: "8월 2일 회고"),
-    //        LogItem(title: "8월 3일 회고"),
-    //        LogItem(title: "8월 4일 회고"),
-    //        LogItem(title: "8월 5일 회고")
-    //    ]
-    
     @State private var pepes: [PepeItem] = [
         .init(type: "멍때리는", count: 5, imageName: "pepeBlank"),
         .init(type: "슬픈", count: 4, imageName: "pepeCry"),

@@ -8,89 +8,89 @@ import SwiftUI
 import SwiftData
 
 struct ContentHeaderView: View{
-  @State private var selectedYear: String
-  @State private var selectedMonth: String
-  
-  init() {
-    let today = Date()
-    let calendar = Calendar.current
-    _selectedYear = State(initialValue: String(calendar.component(.year, from: today)))
-    _selectedMonth = State(initialValue: String(calendar.component(.month, from: today)))
-  }
-  @State private var showPopover = false
-  @Query private var emojis: [EmojiItem]
-  @Environment(\.modelContext) private var modelContext
-  @State private var showNewLogView = false
-  @State private var showSettingView: Bool = false
-  
-  var body: some View{
+    @State private var selectedYear: String
+    @State private var selectedMonth: String
     
-    HStack {
-      Button {
-        showPopover.toggle()
-      } label: {
-        HStack(spacing: 6) {
-          Text("\(selectedMonth)월")
-            .font(.largeTitle)
-          
-          Image(systemName: "chevron.down")
-            .font(.title3)
-            .rotationEffect(.degrees(showPopover ? 180 : 0))
-            .animation(.easeInOut(duration: 0.2), value: showPopover)
+    init() {
+        let today = Date()
+        let calendar = Calendar.current
+        _selectedYear = State(initialValue: String(calendar.component(.year, from: today)))
+        _selectedMonth = State(initialValue: String(calendar.component(.month, from: today)))
+    }
+    
+    @State private var showPopover = false
+    @Query private var emojis: [EmojiItem]
+    @Environment(\.modelContext) private var modelContext
+    @State private var showNewLogView = false
+    @State private var showSettingView: Bool = false
+    
+    var body: some View{
+        
+        HStack {
+            Button {
+                showPopover.toggle()
+            } label: {
+                HStack(spacing: 6) {
+                    Text("\(selectedMonth)월")
+                        .font(.largeTitle)
+                    
+                    Image(systemName: "chevron.down")
+                        .font(.title3)
+                        .rotationEffect(.degrees(showPopover ? 180 : 0))
+                        .animation(.easeInOut(duration: 0.2), value: showPopover)
+                }
+            }
+            .foregroundColor(.primary)
+            .fontWeight(.bold)
+            .overlay(alignment: .bottomLeading) {
+                Color.clear
+                    .frame(width: 1, height: 1)
+                    .offset(x: 18, y: 36)
+                    .popover(isPresented: $showPopover,
+                             attachmentAnchor: .rect(.bounds),
+                             arrowEdge: .top) {
+                        YearMonthPicker(
+                            selectedYear: $selectedYear,
+                            selectedMonth: $selectedMonth,
+                            onDone: { showPopover = false }
+                        )
+                        .frame(width: 320, height: 220)
+                        .presentationCompactAdaptation(.none)
+                        .padding(.top, 12)
+                    }
+            }
+            
+            Spacer()
+            
+            
+            Button { showSettingView.toggle() } label: {
+                Image(systemName: "gearshape")
+                    .font(.title3)
+            }
+            .padding(.leading, 8)
+            .foregroundColor(.primary)
+            
+            
+            
+            Button { showNewLogView = true } label: {
+                Image(systemName: "pencil.line")
+                    .font(.title3)
+            }
+            .padding(.leading, 8)
+            .foregroundColor(.primary)
+            
         }
-      }
-      .foregroundColor(.primary)
-      .fontWeight(.bold)
-      .overlay(alignment: .bottomLeading) {
-        Color.clear
-          .frame(width: 1, height: 1)
-          .offset(x: 18, y: 36)
-          .popover(isPresented: $showPopover,
-                   attachmentAnchor: .rect(.bounds),
-                   arrowEdge: .top) {
-            YearMonthPicker(
-              selectedYear: $selectedYear,
-              selectedMonth: $selectedMonth,
-              onDone: { showPopover = false }
-            )
-            .frame(width: 320, height: 220)
-            .presentationCompactAdaptation(.none)
-            .padding(.top, 12)
-          }
-      }
-      
-      Spacer()
-      
-      
-      Button { showSettingView.toggle() } label: {
-        Image(systemName: "gearshape")
-          .font(.title3)
-      }
-      .padding(.leading, 8)
-      .foregroundColor(.primary)
-      
-      
-      
-      Button { showNewLogView = true } label: {
-        Image(systemName: "pencil.line")
-//        Image(systemName: "square.and.pencil")
-          .font(.title3)
-      }
-      .padding(.leading, 8)
-      .foregroundColor(.primary)
-      
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
+        
+        .sheet(isPresented: $showNewLogView) {
+            NewLogView()
+        }
+        .sheet(isPresented: $showSettingView, content: {
+            SettingView()
+                .presentationDetents([.height(600)])
+                .presentationBackground(Color.clear)
+        })
+        
     }
-    .padding(.horizontal, 20)
-    .padding(.vertical, 12)
-    
-    .sheet(isPresented: $showNewLogView) {
-      NewLogView()
-    }
-    .sheet(isPresented: $showSettingView, content: {
-      SettingView()
-        .presentationDetents([.height(600)])
-        .presentationBackground(Color.clear)
-    })
-    
-  }
 }

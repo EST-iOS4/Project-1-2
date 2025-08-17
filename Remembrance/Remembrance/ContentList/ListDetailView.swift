@@ -27,7 +27,7 @@ struct ListDetailView: View {
     NavigationStack {
       VStack {
         HStack {
-          Text("무슨무슨회고 제목")
+            Text("\(logModel.title)")
             .font(.title3).fontWeight(.semibold)
           
           Spacer()
@@ -43,7 +43,7 @@ struct ListDetailView: View {
           .foregroundStyle(.green)
           .overlay {
             VStack {
-              Image(systemName: "fish.fill")
+                Image(logModel.emoji)
                 .resizable()
                 .frame(width: 100, height: 100)
               Text("여기 페페 이모티콘")
@@ -55,6 +55,14 @@ struct ListDetailView: View {
           .padding(.bottom, 28)
         
         VStack(alignment: .leading) {
+            HStack {
+                Text("내용")
+                    .font(.title3).fontWeight(.semibold)
+                
+                Spacer()
+                
+                Text("\(logModel.tag)")
+            }
           RoundedRectangle(cornerRadius: 20)
             .overlay {
               Text("\(logModel.content)")
