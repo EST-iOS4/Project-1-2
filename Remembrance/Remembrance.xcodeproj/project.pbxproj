@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F45F5F12E517D3800AF175E /* LogListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45F5F02E517D3600AF175E /* LogListHeaderView.swift */; };
+		0F45F5F72E517DF700AF175E /* LogListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45F5F62E517DF100AF175E /* LogListSectionView.swift */; };
+		0F45F5F92E517E1E00AF175E /* LogRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45F5F82E517E1900AF175E /* LogRowView.swift */; };
+		0F45F5FB2E517F8700AF175E /* LogMilestoneSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45F5FA2E517F7B00AF175E /* LogMilestoneSectionView.swift */; };
+		0F45F5FD2E517FB800AF175E /* LogMilestoneHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45F5FC2E517FB000AF175E /* LogMilestoneHeaderView.swift */; };
+		0F45F5FF2E51802100AF175E /* LogChartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45F5FE2E51801A00AF175E /* LogChartHeaderView.swift */; };
+		0F45F6012E51804F00AF175E /* LogChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45F6002E51804B00AF175E /* LogChartView.swift */; };
+		0F45F6032E51807B00AF175E /* ContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45F6022E51807300AF175E /* ContentHeaderView.swift */; };
+		0F45F6052E51819100AF175E /* YearMonthPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45F6042E51818400AF175E /* YearMonthPicker.swift */; };
 		0F7CC7A62E509B8F0042DA79 /* EmojisSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7CC7A52E509B820042DA79 /* EmojisSeed.swift */; };
 		350690862E49AD5B008FED38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 350690822E49AD5B008FED38 /* Assets.xcassets */; };
 		350690872E49AD5B008FED38 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690832E49AD5B008FED38 /* HomeView.swift */; };
@@ -14,13 +23,22 @@
 		3506908C2E49B94D008FED38 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506908B2E49B94D008FED38 /* SettingView.swift */; };
 		3506908E2E49B984008FED38 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506908D2E49B984008FED38 /* StatisticsView.swift */; };
 		350690902E49BB53008FED38 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3506908F2E49BB53008FED38 /* OnBoardingView.swift */; };
-		350690982E49C658008FED38 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690972E49C658008FED38 /* ListView.swift */; };
+		350690982E49C658008FED38 /* ContentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690972E49C658008FED38 /* ContentListView.swift */; };
 		3506909A2E49CF17008FED38 /* ListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690992E49CF17008FED38 /* ListDetailView.swift */; };
 		350690C72E4C1CB8008FED38 /* LogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350690C52E4C1CB8008FED38 /* LogModel.swift */; };
 		6B90391D2E4AD57C006ED1DA /* SaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B90391C2E4AD57C006ED1DA /* SaveView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F45F5F02E517D3600AF175E /* LogListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogListHeaderView.swift; sourceTree = "<group>"; };
+		0F45F5F62E517DF100AF175E /* LogListSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogListSectionView.swift; sourceTree = "<group>"; };
+		0F45F5F82E517E1900AF175E /* LogRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRowView.swift; sourceTree = "<group>"; };
+		0F45F5FA2E517F7B00AF175E /* LogMilestoneSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMilestoneSectionView.swift; sourceTree = "<group>"; };
+		0F45F5FC2E517FB000AF175E /* LogMilestoneHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMilestoneHeaderView.swift; sourceTree = "<group>"; };
+		0F45F5FE2E51801A00AF175E /* LogChartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogChartHeaderView.swift; sourceTree = "<group>"; };
+		0F45F6002E51804B00AF175E /* LogChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogChartView.swift; sourceTree = "<group>"; };
+		0F45F6022E51807300AF175E /* ContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentHeaderView.swift; sourceTree = "<group>"; };
+		0F45F6042E51818400AF175E /* YearMonthPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthPicker.swift; sourceTree = "<group>"; };
 		0F7CC7A52E509B820042DA79 /* EmojisSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojisSeed.swift; sourceTree = "<group>"; };
 		350690672E49A879008FED38 /* Remembrance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remembrance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		350690822E49AD5B008FED38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -29,7 +47,7 @@
 		3506908B2E49B94D008FED38 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3506908D2E49B984008FED38 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		3506908F2E49BB53008FED38 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
-		350690972E49C658008FED38 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		350690972E49C658008FED38 /* ContentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListView.swift; sourceTree = "<group>"; };
 		350690992E49CF17008FED38 /* ListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailView.swift; sourceTree = "<group>"; };
 		350690C52E4C1CB8008FED38 /* LogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogModel.swift; sourceTree = "<group>"; };
 		6B90391C2E4AD57C006ED1DA /* SaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveView.swift; sourceTree = "<group>"; };
@@ -46,6 +64,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F45F5EB2E517C6500AF175E /* LogList */ = {
+			isa = PBXGroup;
+			children = (
+				0F45F5F02E517D3600AF175E /* LogListHeaderView.swift */,
+				0F45F5F62E517DF100AF175E /* LogListSectionView.swift */,
+				0F45F5F82E517E1900AF175E /* LogRowView.swift */,
+			);
+			path = LogList;
+			sourceTree = "<group>";
+		};
+		0F45F5EC2E517C6900AF175E /* LogMilestone */ = {
+			isa = PBXGroup;
+			children = (
+				0F45F5FC2E517FB000AF175E /* LogMilestoneHeaderView.swift */,
+				0F45F5FA2E517F7B00AF175E /* LogMilestoneSectionView.swift */,
+			);
+			path = LogMilestone;
+			sourceTree = "<group>";
+		};
+		0F45F5ED2E517C9E00AF175E /* LogChart */ = {
+			isa = PBXGroup;
+			children = (
+				0F45F5FE2E51801A00AF175E /* LogChartHeaderView.swift */,
+				0F45F6002E51804B00AF175E /* LogChartView.swift */,
+			);
+			path = LogChart;
+			sourceTree = "<group>";
+		};
+		0F45F6062E51826600AF175E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0F45F6042E51818400AF175E /* YearMonthPicker.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		3506905E2E49A878008FED38 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +149,7 @@
 				3506907F2E49AD5B008FED38 /* OnBoarding */,
 				350690802E49AD5B008FED38 /* Setting */,
 				350690812E49AD5B008FED38 /* Statistics */,
+				0F45F6062E51826600AF175E /* Components */,
 				350690822E49AD5B008FED38 /* Assets.xcassets */,
 				350690842E49AD5B008FED38 /* RemembranceApp.swift */,
 			);
@@ -112,7 +167,11 @@
 		350690942E49C645008FED38 /* ContentList */ = {
 			isa = PBXGroup;
 			children = (
-				350690972E49C658008FED38 /* ListView.swift */,
+				0F45F6022E51807300AF175E /* ContentHeaderView.swift */,
+				350690972E49C658008FED38 /* ContentListView.swift */,
+				0F45F5EC2E517C6900AF175E /* LogMilestone */,
+				0F45F5ED2E517C9E00AF175E /* LogChart */,
+				0F45F5EB2E517C6500AF175E /* LogList */,
 				6B90391C2E4AD57C006ED1DA /* SaveView.swift */,
 				350690992E49CF17008FED38 /* ListDetailView.swift */,
 			);
@@ -200,13 +259,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F45F5FD2E517FB800AF175E /* LogMilestoneHeaderView.swift in Sources */,
 				3506908C2E49B94D008FED38 /* SettingView.swift in Sources */,
+				0F45F5F92E517E1E00AF175E /* LogRowView.swift in Sources */,
+				0F45F5F72E517DF700AF175E /* LogListSectionView.swift in Sources */,
 				350690C72E4C1CB8008FED38 /* LogModel.swift in Sources */,
+				0F45F6012E51804F00AF175E /* LogChartView.swift in Sources */,
 				3506908E2E49B984008FED38 /* StatisticsView.swift in Sources */,
 				0F7CC7A62E509B8F0042DA79 /* EmojisSeed.swift in Sources */,
-				350690982E49C658008FED38 /* ListView.swift in Sources */,
+				0F45F5FB2E517F8700AF175E /* LogMilestoneSectionView.swift in Sources */,
+				350690982E49C658008FED38 /* ContentListView.swift in Sources */,
+				0F45F6052E51819100AF175E /* YearMonthPicker.swift in Sources */,
 				6B90391D2E4AD57C006ED1DA /* SaveView.swift in Sources */,
 				350690872E49AD5B008FED38 /* HomeView.swift in Sources */,
+				0F45F5FF2E51802100AF175E /* LogChartHeaderView.swift in Sources */,
+				0F45F5F12E517D3800AF175E /* LogListHeaderView.swift in Sources */,
+				0F45F6032E51807B00AF175E /* ContentHeaderView.swift in Sources */,
 				350690902E49BB53008FED38 /* OnBoardingView.swift in Sources */,
 				350690882E49AD5B008FED38 /* RemembranceApp.swift in Sources */,
 				3506909A2E49CF17008FED38 /* ListDetailView.swift in Sources */,
