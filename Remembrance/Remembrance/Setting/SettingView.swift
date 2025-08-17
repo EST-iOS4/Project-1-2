@@ -12,24 +12,26 @@ struct SettingView: View {
   @Environment(\.dismiss) var dismiss
   @Environment(\.colorScheme) private var scheme
   @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
-  @AppStorage("currentTheme") private var currentTheme: String?
-//  @AppStorage("userTheme") private var currentTheme: Color =
-//  @Environment(\.modelContext) var modelContext
-//  @Query private var logContext: [ThemeModel]
-//  @State var currentTheme : String?
+  @AppStorage("currentTheme") private var currentTheme: String = "기본"
+//  @AppStorage private var fontSize: Double = 18.0
+  // Double 타입으로 저장
+      @AppStorage("fontSize") private var fontSize: Double = 18.0
+      
+      // 실제 사용할 CGFloat
+      private var fontSizeValue: CGFloat {
+        CGFloat(fontSize)
+      }
   @State var themeText = ""
-//  let themeModel: ThemeModel
   
   var body: some View {
     VStack {
       VStack {
         HStack {
-          Text("설정").font(.title).bold()
+          Text("설정")
+//            .font(.system(size: CGFloat(fontSize+8)))
+            .font(.title).bold()
           Spacer()
           Button {
-            // 글씨크기, 테마 정보 저장 하기
-            //UserDefaults.standard.set(currentTheme, forKey: "currentTheme")
-            
             dismiss()
           } label: {
             RoundedRectangle(cornerRadius: 8)
@@ -44,15 +46,19 @@ struct SettingView: View {
         .padding(.bottom, 28)
         
         //폰트사이즈
-        VStack (alignment: .leading, spacing: 16){
-          Text("폰트사이즈").font(.title3).bold()
-          HStack {
-            Text("가")
-            Slider(value: .constant(10), in: 1...100)
-            Text("가")
-          }
-          .frame(width: .infinity,height: 50)
-        }
+//        VStack (alignment: .leading, spacing: 16){
+//          Text("텍스트 크기 - 현재 값은 : \(fontSize)")
+//            .font(.system(size: CGFloat(fontSize)))
+//            .font(.title3).bold()
+//          HStack {
+//            Text("가")
+//              .font(.callout)
+//            Slider(value: $fontSize, in: 14...38, step: 2)
+//            Text("가")
+//              .font(.title2)
+//          }
+//        }
+//        .padding(.bottom, 28)
         
         //테마
         VStack (alignment: .leading, spacing: 16){
@@ -64,12 +70,13 @@ struct SettingView: View {
               Text("페페").tag("페페")
               Text("블러썸").tag("블러썸")
             }
+//            .padding(.bottom, 10)
             .pickerStyle(.segmented)
-            Image(currentTheme ?? "기본")
+            Image(currentTheme)
               .resizable()
-              .aspectRatio(contentMode: .fill)
+              .aspectRatio(contentMode: .fit)
               .clipped()
-              .frame(width: 200, height: 200)
+              .frame(width: 250, height: 250)
               .border(Color.gray)
 //            RoundedRectangle(cornerRadius: 15)
 //              .frame(width: 150, height: 250)
@@ -77,24 +84,19 @@ struct SettingView: View {
           }
           
           .onChange(of: currentTheme, initial: true) {
-            themeText = "현재 테마는 \(self.currentTheme ?? "기본") 입니다"
-            UserDefaults.standard.set(currentTheme, forKey: "currentTheme")
+            themeText = "현재 테마는 \(self.currentTheme) 입니다"
+//            UserDefaults.standard.set(currentTheme, forKey: "currentTheme")
           }
         }
+        Spacer()
         
       }
     }
     .padding(20)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .frame(width: 370, height: 600)
+    .frame(width: 370, height: 500)
     .background(.themeBG)
     .clipShape(.rect(cornerRadius: 30))
-//    .onAppear() {
-////      if UserDefaults.standard.string(forKey: "currentTheme") == nil {
-////        currentTheme = "기본"
-////      }
-//      currentTheme = UserDefaults.standard.string(forKey: "currentTheme") == nil ? "기본" : UserDefaults.standard.string(forKey: "currentTheme")
-//    }
   }
 }
 

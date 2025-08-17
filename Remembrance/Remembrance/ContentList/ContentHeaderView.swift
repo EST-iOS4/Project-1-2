@@ -88,7 +88,7 @@ struct ContentHeaderView: View{
     }
     .sheet(isPresented: $showSettingView, content: {
       SettingView()
-        .presentationDetents([.height(600)])
+        .presentationDetents([.height(500)])
         .presentationBackground(Color.clear)
     })
     
