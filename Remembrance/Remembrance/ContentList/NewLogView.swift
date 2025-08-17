@@ -13,7 +13,7 @@ import SwiftData
 enum pepeEmoji: CaseIterable {
     case pepeBlank
     case pepeCry
-    case pepeFist
+    case pepeAngry
     case pepeFlustered
     case pepeGloomy
     case pepeHappy
@@ -26,8 +26,8 @@ enum pepeEmoji: CaseIterable {
         case .pepeCry:
             return "pepeCry"
             
-        case .pepeFist:
-            return "pepeFist"
+        case .pepeAngry:
+            return "pepeAngry"
             
         case .pepeFlustered:
             return "pepeFlustered"
