@@ -5,45 +5,38 @@
 //  Created by NaSangJin on 8/12/25.
 //
 
+
 import SwiftUI
 import SwiftData
 
-// MARK: - 임시 circle 데이터
-enum CircleColor: CaseIterable {
-    case blue
-    case green
-    case gray
-    case brown
-    case cyan
-    case red
+
+enum pepeEmoji: CaseIterable {
+    case pepeBlank
+    case pepeCry
+    case pepeFist
+    case pepeFlustered
+    case pepeGloomy
+    case pepeHappy
     
-    @ViewBuilder
-    var circleImage: some View {
+    var pepeImage: String {
         switch self {
-        case .blue:
-            Circle()
-                .frame(width: 50, height: 50)
-                .foregroundStyle(.blue)
-        case .green:
-            Circle()
-                .frame(width: 50, height: 50)
-                .foregroundStyle(.green)
-        case .gray:
-            Circle()
-                .frame(width: 50, height: 50)
-                .foregroundStyle(.gray)
-        case .brown:
-            Circle()
-                .frame(width: 50, height: 50)
-                .foregroundStyle(.brown)
-        case .cyan:
-            Circle()
-                .frame(width: 50, height: 50)
-                .foregroundStyle(.cyan)
-        case .red:
-            Circle()
-                .frame(width: 50, height: 50)
-                .foregroundStyle(.red)
+        case .pepeBlank:
+            return "pepeBlank"
+            
+        case .pepeCry:
+            return "pepeCry"
+            
+        case .pepeFist:
+            return "pepeFist"
+            
+        case .pepeFlustered:
+            return "pepeFlustered"
+            
+        case .pepeGloomy:
+            return "pepeGloomy"
+            
+        case .pepeHappy:
+            return "pepeHappy"
         }
     }
 }
@@ -51,11 +44,16 @@ enum CircleColor: CaseIterable {
 struct NewLogView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
-    @Query private var logContext: [LogModel]
+    @Query private var logModel: [LogModel]
     
     @State private var title: String = ""
     @State private var text: String = ""
-    @State private var tagDatas: [String] = ["#태그1", "#태그2", "#태그3"]
+    @State private var emoji: String = ""
+    @State private var tag: String = ""
+    
+    @State private var tagSelection: String = ""
+    let tagDatas: [String] = ["#태그1", "#태그2", "#태그3", "#태그4", "#태그5"]
+    
     @State private var selectDate: Date = Date()
     
     // 텍스트 에디터 초기 글자
@@ -68,59 +66,66 @@ struct NewLogView: View {
         return formatter
     }()
     
-    let circles: [CircleColor] = CircleColor.allCases
-    
+    let pepes: [pepeEmoji] = pepeEmoji.allCases
     
     var body: some View {
         NavigationStack {
-          VStack {
-              //큰제목으로
-              TextField(" 제목", text:$title).font(.title.weight(.semibold))
+            VStack {
+                // MARK: - 제목 칸
+                TextField(" 제목", text: $title).font(.title.weight(.semibold))
                     .padding(10)
                     .background(Color(UIColor.systemGray6))
                     .clipShape(RoundedRectangle(cornerRadius: 15))
                     .padding(.bottom, 28)
-                    
+                
+                // MARK: - 날짜 칸
                 HStack {
-                  Text("날짜").font(.title3).fontWeight(.semibold)
+                    Text("날짜").font(.title3).fontWeight(.semibold)
                     DatePicker("", selection: $selectDate, displayedComponents: [.date])
                         .datePickerStyle(.compact)
                 }
                 .padding(.bottom, 28)
                 
+                // MARK: - 이모지 선택 칸
                 HStack {
-                    ForEach(circles, id: \.self) { circles in
+                    ForEach(pepes, id: \.self) { pepe in
                         Button {
-                            
+                            emoji = pepe.pepeImage
                         } label: {
-                            circles.circleImage
+                            HStack {
+                                Image(pepe.pepeImage)
+                                    .resizable()
+                                    .renderingMode(.original)
+                                    .frame(width: 50, height: 50)
+                                    .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
+                            }
+                            .background(pepe.pepeImage == emoji ? Color.pink.opacity(0.9) : Color.gray.opacity(0.4))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
-                        
                     }
                 }
                 .padding(.bottom, 28)
-                .background()
                 
-              
-                
+                // MARK: - 내용 기록 칸
                 VStack(alignment: .leading, spacing: 16) {
-                  HStack {
-                    Text("내용").font(.title3).fontWeight(.semibold)
-                    //태그 수정예정
-                    DatePicker("", selection: $selectDate, displayedComponents: [.date])
-                        .datePickerStyle(.compact)
-                        .padding(0)
-                  }
-
-                  
-                  TextEditor(text: $text).customTextEditor(placeholder: placeholder, userInput: $text)
-//                    Picker("", selection: $tagDatas) {
-//                        ForEach (tagDatas, id: \.self) { tagData in
-//                            Text(tagData)
-//                                .frame(width: 40)
-//                        }
-//                    }
-//                    .pickerStyle(.segmented)
+                    HStack {
+                        Text("내용")
+                            .font(.title3).fontWeight(.semibold)
+                        
+                        Spacer()
+                        
+                        // MARK: - 태그 선택 구현 완료
+                        Picker("태그 선택", selection: $tagSelection) {
+                            Text("태그 선택").tag("")
+                            ForEach(tagDatas, id: \.self) { tag in
+                                Text(tag)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                    }
+                    
+                    
+                    TextEditor(text: $text).customTextEditor(placeholder: placeholder, userInput: $text)
                 }
                 
             }
@@ -131,43 +136,37 @@ struct NewLogView: View {
                     Button {
                         dismiss()
                     } label: {
-                      Text("취소")
-                        .foregroundStyle(.red)
-//                      RoundedRectangle(cornerRadius: 8)
-//                        .fill(Color.green)
-//                        .overlay {
-//                          Text("취소")
-//                            .foregroundStyle(.red)
-//                        }
-//                        .frame(width: 50, height: 30)
+                        Text("취소")
+                            .foregroundStyle(.red)
                     }
                 }
                 
-                // 저장 버튼
+                // MARK: - 저장 로직
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         // 모델컨텍스트에 데이터 insert 하기
                         let newLog = LogModel(
                             id: UUID(),
-                            emoji: "",
+                            emoji: emoji,
                             date: selectDate,
                             title: title,
                             content: text,
-                            tag: ""
+                            tag: tagSelection
                         )
                         modelContext.insert(newLog)
                         
                         dismiss()
                     } label: {
-                      RoundedRectangle(cornerRadius: 8)
-                        .fill(text.isEmpty ? Color.gray : Color.green)
-                        .overlay {
-                          Text("완료")
-                            .foregroundStyle(.white)
-                        }
-                        .frame(width: 50, height: 30)
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(text.isEmpty ? Color.gray : Color.green)
+                            .overlay {
+                                Text("완료")
+                                    .foregroundStyle(.white)
+                            }
+                            .frame(width: 50, height: 30)
                     }
-                    .disabled(text.isEmpty)
+                    // MARK: - TODO -> tag 선택까지 필수로 넣어야 버튼이 활성화 되도록 하고 싶음...
+                    .disabled(title.isEmpty && text.isEmpty)
                 }
             }
         }
@@ -197,8 +196,8 @@ struct CustomTextEditorStyle: ViewModifier {
             .background(Color(UIColor.systemGray6))
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .scrollContentBackground(.hidden)
-      //여기 고쳐야함 (공부하고 적용해야함..잘 머르겠움..)
-//            .frame(width: .infinity, height: 500)
+        //여기 고쳐야함 (공부하고 적용해야함..잘 머르겠움..)
+        //            .frame(width: .infinity, height: 500)
             .frame(width: .infinity, height: .infinity)
             .overlay(alignment: .bottomTrailing) {
                 Text("\(text.count) / 200")
@@ -220,5 +219,5 @@ extension TextEditor {
 
 
 #Preview {
-  NewLogView()
+    NewLogView()
 }
