@@ -19,8 +19,6 @@ struct LogRowView: View {
         NavigationLink(destination: ListDetailView(logModel: logModel)) {
             Text("\(logModel.date, formatter: dateFormatter)")
                 .foregroundColor(.primary)
-            //                    .padding(.horizontal, 24)
         }
-        
     }
 }
