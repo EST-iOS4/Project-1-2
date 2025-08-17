@@ -20,7 +20,8 @@ struct ContentHeaderView: View{
     @State private var showPopover = false
     @Query private var emojis: [EmojiItem]
     @Environment(\.modelContext) private var modelContext
-    @State private var showSave = false
+    @State private var showNewLogView = false
+    @State private var showSettingView: Bool = false
     
     var body: some View{
         
@@ -61,12 +62,14 @@ struct ContentHeaderView: View{
             Spacer()
             
             
+          Button { showSettingView.toggle() } label: {
             Image(systemName: "gearshape")
-                .font(.title3)
+            .font(.title3)
+          }
             
             
             
-            Button { showSave = true } label: {
+            Button { showNewLogView = true } label: {
                 Image(systemName: "pencil.line")
                     .font(.title3)
             }
@@ -77,10 +80,14 @@ struct ContentHeaderView: View{
         .padding(.horizontal, 20)
         .padding(.vertical, 12)
         
-        .sheet(isPresented: $showSave) {
-            SaveView()
+        .sheet(isPresented: $showNewLogView) {
+          NewLogView()
         }
-        
+        .sheet(isPresented: $showSettingView, content: {
+                  SettingView()
+                    .presentationDetents([.height(600)])
+                    .presentationBackground(Color.clear)
+                })
         
     }
 }

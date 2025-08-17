@@ -1,5 +1,5 @@
 //
-//  SaveView.swift
+//  NewLogView.swift
 //  Remembrance
 //
 //  Created by NaSangJin on 8/12/25.
@@ -48,7 +48,7 @@ enum CircleColor: CaseIterable {
     }
 }
 
-struct SaveView: View {
+struct NewLogView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
     @Query private var logContext: [LogModel]
@@ -220,5 +220,5 @@ extension TextEditor {
 
 
 #Preview {
-    SaveView()
+  NewLogView()
 }
