@@ -198,7 +198,9 @@ struct CustomTextEditorStyle: ViewModifier {
             .scrollContentBackground(.hidden)
         //여기 고쳐야함 (공부하고 적용해야함..잘 머르겠움..)
         //            .frame(width: .infinity, height: 500)
-            .frame(width: .infinity, height: .infinity)
+//            .frame(width: .infinity, height: .infinity)
+            .frame(maxWidth: .infinity)
+            .frame(height: 400)
             .overlay(alignment: .bottomTrailing) {
                 Text("\(text.count) / 200")
                     .padding()
