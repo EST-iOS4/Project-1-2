@@ -19,7 +19,7 @@ struct HomeView: View {
                 ContentListView()
             }.task {
                 // 앱 첫 진입 시 1회 시드
-                try? seedEmojisIfNeeded(context: modelContext)
+//                try? seedEmojisIfNeeded(context: modelContext)
             }
         }
     }
