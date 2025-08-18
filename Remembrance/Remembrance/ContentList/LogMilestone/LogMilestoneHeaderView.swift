@@ -15,7 +15,6 @@ struct LogMilestoneHeaderView: View{
             HStack{
                 Text("글자가 1cm 라면?")
                     .font(.title2).fontWeight(.semibold)
-                    .foregroundColor(.black)
             }
         }
     }
