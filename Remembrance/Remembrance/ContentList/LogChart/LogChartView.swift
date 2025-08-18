@@ -70,7 +70,7 @@ struct LogChartView: View {
           
           BarMark(
             x: .value("Emoji", "\(themeManager.currentTheme)\(item.emotionName)"),
-            y: .value("Count", item.count)
+            y: .value("Count", item.count),
             width: .fixed(20)
           )
           .annotation(position: .top) {
