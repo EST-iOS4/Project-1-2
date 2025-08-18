@@ -64,7 +64,6 @@ struct ContentListView: View {
     ]
     
     
-    @State private var showMoreLogs = false   // 더보기 토글
     
     var body: some View {
         VStack{
@@ -98,11 +97,11 @@ struct ContentListView: View {
                 
                 
                 // MARK: - 로그 뷰 섹션
-                Section {
+                Section{
                     VStack{
-                        LogListHeaderView(showMoreLogs: $showMoreLogs)
+                        LogListHeaderView()
                     }
-                    LogListSectionView(logs: monthLogs, showMoreLogs: $showMoreLogs)
+                    LogListSectionView(logs: monthLogs)
                 }
             }
             .listStyle(.plain)

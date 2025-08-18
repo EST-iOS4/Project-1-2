@@ -9,7 +9,6 @@ import SwiftData
 
 struct LogListSectionView: View {
     let logs: [LogModel]
-    @Binding var showMoreLogs: Bool
     @Environment(\.modelContext) private var modelContext
     
     var body: some View {
@@ -23,8 +22,7 @@ struct LogListSectionView: View {
                 .padding([.top,.bottom], 28)
         } else {
             // 필요 시 더보기 로직
-            let showing = showMoreLogs ? logs : Array(logs.prefix(3))
-            ForEach(showing) { log in
+            ForEach(logs) { log in
                 VStack {
                     LogRowView(logModel: log)
                         .listStyle(.plain)
