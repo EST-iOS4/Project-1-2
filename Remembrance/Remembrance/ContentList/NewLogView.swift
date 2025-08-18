@@ -55,7 +55,7 @@ struct NewLogView: View {
   @State private var tag: String = ""
   
   @State private var tagSelection: String = ""
-  let tagDatas: [String] = ["#태그1", "#태그2", "#태그3", "#태그4", "#태그5"]
+  let tagDatas: [String] = ["프로젝트", "학습", "일상", "자기관리", "취미"]
   
   @State private var selectDate: Date = Date()
   
@@ -87,6 +87,7 @@ struct NewLogView: View {
           Text("날짜").font(.title3).fontWeight(.semibold)
           DatePicker("", selection: $selectDate, displayedComponents: [.date])
             .datePickerStyle(.compact)
+            .environment(\.locale, .init(identifier: "ko_KR"))
         }
         .padding(.bottom, 28)
         

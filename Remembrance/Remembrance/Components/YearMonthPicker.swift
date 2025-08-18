@@ -50,6 +50,5 @@ struct YearMonthPicker: View {
         
         .padding()
         .frame(width: 320) // 팝오버 크기
-        .presentationCompactAdaptation(.none) // ← 아이폰에서도 팝오버 유지 (iOS17+)
     }
 }
