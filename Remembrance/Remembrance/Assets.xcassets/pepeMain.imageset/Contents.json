@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "페페.jpg",
+      "filename" : "pepeMain.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "페페 1.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "페페 2.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "기본이모지.jpg",
+      "filename" : "emojiMain.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "기본이모지 1.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "기본이모지 2.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }
