@@ -87,7 +87,7 @@ struct ContentListView: View {
                         LogChartHeaderView()
                     }
                     VStack(alignment: .leading) {
-                        LogChartView()
+                        LogChartView(selectedDate: selectedDate)
                     }
                     .padding(.bottom, 20)
                     .listRowSeparator(.hidden)
