@@ -9,6 +9,7 @@ import SwiftData
 
 struct LogListSectionView: View {
     @State private var showAlert: Bool = false
+    @State private var deleteID: UUID? = nil
     
     let logs: [LogModel]
     @Environment(\.modelContext) private var modelContext
@@ -30,19 +31,26 @@ struct LogListSectionView: View {
                         .listStyle(.plain)
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button {
+                                deleteID = log.id
                                 showAlert = true
                             } label: {
                                 Text("삭제")
                             }
                             .tint(.red)
                         }
-                        .alert("정말로 삭제하시겠습니까?", isPresented: $showAlert) {
-                            Button(role: .destructive) {
-                                modelContext.delete(log)
-                            } label: {
-                                Text("삭제")
-                            }
-                        }
+                }
+            }
+            .alert("정말로 삭제하시겠습니까?", isPresented: $showAlert) {
+                Button(role: .destructive) {
+                    if let id = deleteID, let idx = logs.firstIndex(where: { $0.id == id }) {
+                        modelContext.delete(logs[idx])
+                    }
+                    deleteID = nil
+                } label: {
+                    Text("삭제")
+                }
+                Button("취소", role: .cancel) {
+                    deleteID = nil
                 }
             }
         }
