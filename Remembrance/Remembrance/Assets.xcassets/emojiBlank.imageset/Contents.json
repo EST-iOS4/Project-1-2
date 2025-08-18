@@ -6,10 +6,12 @@
       "scale" : "1x"
     },
     {
+      "filename" : "emojiBlank 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "emojiBlank 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

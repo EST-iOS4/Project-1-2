@@ -11,7 +11,6 @@ import SwiftData
 struct SettingView: View {
   @Environment(\.dismiss) var dismiss
   @Environment(\.colorScheme) private var scheme
-  @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
   @AppStorage("currentTheme") private var currentTheme: String = "기본"
 //  @AppStorage private var fontSize: Double = 18.0
   // Double 타입으로 저장
@@ -28,7 +27,6 @@ struct SettingView: View {
       VStack {
         HStack {
           Text("설정")
-//            .font(.system(size: CGFloat(fontSize+8)))
             .font(.title).bold()
           Spacer()
           Button {
@@ -70,16 +68,19 @@ struct SettingView: View {
               Text("페페").tag("페페")
               Text("블러썸").tag("블러썸")
             }
-//            .padding(.bottom, 10)
             .pickerStyle(.segmented)
-            Image(currentTheme)
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .clipped()
-              .frame(width: 250, height: 250)
-              .border(Color.gray)
-//            RoundedRectangle(cornerRadius: 15)
-//              .frame(width: 150, height: 250)
+            RoundedRectangle(cornerRadius: 20)
+              .frame(width: 255, height: 255)
+              .foregroundStyle(.gray)
+              .overlay{
+                Image(currentTheme)
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+                  .clipped()
+                  .frame(width: 250, height: 250)
+                  .cornerRadius(18)
+              }
+            
             Text("\(themeText)")
           }
           
@@ -105,16 +106,16 @@ struct SettingView: View {
   SettingView()
 }
 
-enum Theme: String, CaseIterable {
-  case systemDefault = "Default"
-//  case defaultEmoji = "기본"
-//  case pepeEmoji = "페페"
-  
-  
-  var colorScheme: ColorScheme? {
-    switch self {
-    case .systemDefault:
-      return nil
-    }
-  }
-}
+//enum Theme: String, CaseIterable {
+//  case systemDefault = "Default"
+////  case defaultEmoji = "기본"
+////  case pepeEmoji = "페페"
+//  
+//  
+//  var colorScheme: ColorScheme? {
+//    switch self {
+//    case .systemDefault:
+//      return nil
+//    }
+//  }
+//}
