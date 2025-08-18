@@ -1,6 +1,9 @@
 # Remembrance
 기억을 쌓고, 감정을 통해 기억을 되돌아보는 회고앱입니다.
 ---
+# 개발환경
+<img src="https://img.shields.io/badge/Swift-F05138?style=flat&logo=Swift&logoColor=white"> <img src="https://img.shields.io/badge/xcode-147EFB?style=flat&logo=xcode&logoColor=white"> <img src="https://img.shields.io/badge/-Git-F05032?style=flat&logo=git&logoColor=white">
+---
 # 팀원
 박재이 이재영 나상진 엄정민
 ---
