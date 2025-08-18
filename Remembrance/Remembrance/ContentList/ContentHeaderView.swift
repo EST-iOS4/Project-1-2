@@ -105,7 +105,7 @@ struct ContentHeaderView: View {
         .padding(.horizontal, 20)
         .padding(.vertical, 12)
         
-        .sheet(isPresented: $showNewLogView) {
+        .fullScreenCover(isPresented: $showNewLogView) {
             NewLogView()
         }
         .sheet(isPresented: $showSettingView, content: {
