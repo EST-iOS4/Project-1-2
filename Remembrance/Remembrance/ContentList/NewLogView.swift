@@ -10,45 +10,48 @@ import SwiftUI
 import SwiftData
 
 
-enum pepeEmoji: CaseIterable {
-  case pepeBlank
-  case pepeCry
-  case pepeAngry
-  case pepeFlustered
-  case pepeGloomy
-  case pepeHappy
-  
-  var pepeImage: String {
-    switch self {
-    case .pepeBlank:
-      return "pepeBlank"
-      
-    case .pepeCry:
-      return "pepeCry"
-      
-    case .pepeAngry:
-      return "pepeAngry"
-      
-    case .pepeFlustered:
-      return "pepeFlustered"
-      
-    case .pepeGloomy:
-      return "pepeGloomy"
-      
-    case .pepeHappy:
-      return "pepeHappy"
-    }
-  }
-}
+//enum pepeEmoji: CaseIterable {
+//  case pepeBlank
+//  case pepeCry
+//  case pepeAngry
+//  case pepeFlustered
+//  case pepeGloomy
+//  case pepeHappy
+//  
+//  var pepeImage: String {
+//    switch self {
+//    case .pepeBlank:
+//      return "pepeBlank"
+//      
+//    case .pepeCry:
+//      return "pepeCry"
+//      
+//    case .pepeAngry:
+//      return "pepeAngry"
+//      
+//    case .pepeFlustered:
+//      return "pepeFlustered"
+//      
+//    case .pepeGloomy:
+//      return "pepeGloomy"
+//      
+//    case .pepeHappy:
+//      return "pepeHappy"
+//    }
+//  }
+//}
 
 struct NewLogView: View {
-  @Environment(\.dismiss) var dismiss
-  @Environment(\.modelContext) var modelContext
+  
   @Query private var logModel: [LogModel]
+  @Environment(\.modelContext) var modelContext
+  @Environment(\.dismiss) var dismiss
+  
+  @EnvironmentObject var themeManager : ThemeManager
   
   @State private var title: String = ""
   @State private var text: String = ""
-  @State private var emoji: String = ""
+  @State private var emotion: String = ""
   @State private var tag: String = ""
   
   @State private var tagSelection: String = ""
@@ -58,8 +61,6 @@ struct NewLogView: View {
   
   // 텍스트 에디터 초기 글자
   private let placeholder: String = "기록을 작성해 보세요!"
-  // 포커스 상태 바인딩
-  @FocusState private var isFocused: Bool
   
   let date = Date()
   let dateFormat: DateFormatter = {
@@ -68,7 +69,8 @@ struct NewLogView: View {
     return formatter
   }()
   
-  let pepes: [pepeEmoji] = pepeEmoji.allCases
+//  let pepes: [pepeEmoji] = pepeEmoji.allCases
+  let emotions: [emotionType] = emotionType.allCases
   
   var body: some View {
     NavigationStack {
@@ -79,8 +81,7 @@ struct NewLogView: View {
           .background(Color(UIColor.systemGray6))
           .clipShape(RoundedRectangle(cornerRadius: 15))
           .padding(.bottom, 28)
-          .focused($isFocused)
-        
+
         // MARK: - 날짜 칸
         HStack {
           Text("날짜").font(.title3).fontWeight(.semibold)
@@ -91,18 +92,18 @@ struct NewLogView: View {
         
         // MARK: - 이모지 선택 칸
         HStack {
-          ForEach(pepes, id: \.self) { pepe in
+          ForEach(emotions, id: \.self) { emo in
             Button {
-              emoji = pepe.pepeImage
+              emotion = emo.emotionString
             } label: {
               HStack {
-                Image(pepe.pepeImage)
+                Image("\(themeManager.currentTheme)\(emo.emotionString)")
                   .resizable()
                   .renderingMode(.original)
                   .frame(width: 50, height: 50)
                   .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
               }
-              .background(pepe.pepeImage == emoji ? Color.pink.opacity(0.9) : Color.gray.opacity(0.4))
+              .background("\(themeManager.currentTheme)\(emo.emotionString)" == emotion ? Color.pink.opacity(0.9) : Color.gray.opacity(0.4))
               .clipShape(RoundedRectangle(cornerRadius: 10))
             }
           }
@@ -150,7 +151,7 @@ struct NewLogView: View {
             // 모델컨텍스트에 데이터 insert 하기
             let newLog = LogModel(
               id: UUID(),
-              emoji: emoji,
+              emoji: emotion,
               date: selectDate,
               title: title,
               content: text,
