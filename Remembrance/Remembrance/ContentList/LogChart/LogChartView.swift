@@ -62,7 +62,8 @@ struct LogChartView: View {
                 Chart(bars) { item in
                     BarMark(
                         x: .value("Emoji", item.imageName),
-                        y: .value("Count", item.count)
+                        y: .value("Count", item.count),
+                        width: .fixed(20)
                     )
                     .annotation(position: .top) {
                         if item.count > 0 {
