@@ -9,38 +9,6 @@
 import SwiftUI
 import SwiftData
 
-
-//enum pepeEmoji: CaseIterable {
-//  case pepeBlank
-//  case pepeCry
-//  case pepeAngry
-//  case pepeFlustered
-//  case pepeGloomy
-//  case pepeHappy
-//  
-//  var pepeImage: String {
-//    switch self {
-//    case .pepeBlank:
-//      return "pepeBlank"
-//      
-//    case .pepeCry:
-//      return "pepeCry"
-//      
-//    case .pepeAngry:
-//      return "pepeAngry"
-//      
-//    case .pepeFlustered:
-//      return "pepeFlustered"
-//      
-//    case .pepeGloomy:
-//      return "pepeGloomy"
-//      
-//    case .pepeHappy:
-//      return "pepeHappy"
-//    }
-//  }
-//}
-
 struct NewLogView: View {
   
   @Query private var logModel: [LogModel]
@@ -74,7 +42,7 @@ struct NewLogView: View {
   
   var body: some View {
     NavigationStack {
-      VStack {
+      ScrollView {
         // MARK: - 제목 칸
         TextField(" 제목", text: $title).font(.title.weight(.semibold))
           .padding(10)
@@ -104,7 +72,8 @@ struct NewLogView: View {
                   .frame(width: 50, height: 50)
                   .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
               }
-              .background("\(themeManager.currentTheme)\(emo.emotionString)" == emotion ? Color.pink.opacity(0.9) : Color.gray.opacity(0.4))
+//              .background("\(themeManager.currentTheme)\(emo.emotionString)" == emotion ? Color.pink.opacity(0.9) : Color.gray.opacity(0.4))
+              .background(emotion == emo.emotionString ? Color.pink.opacity(0.8) : Color.gray.opacity(0.4))
               .clipShape(RoundedRectangle(cornerRadius: 10))
             }
           }
@@ -205,7 +174,7 @@ struct CustomTextEditorStyle: ViewModifier {
     //            .frame(width: .infinity, height: 500)
     //            .frame(width: .infinity, height: .infinity)
       .frame(maxWidth: .infinity)
-      .frame(height: 400)
+      .frame(minHeight: 400)
       .overlay(alignment: .bottomTrailing) {
         Text("\(text.count) / 200")
           .padding()
@@ -227,4 +196,5 @@ extension TextEditor {
 
 #Preview {
   NewLogView()
+        .environmentObject(ThemeManager())
 }
