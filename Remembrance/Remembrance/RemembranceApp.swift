@@ -15,7 +15,7 @@ struct RemembranceApp: App {
         WindowGroup {
             HomeView()
         }
-        .modelContainer(for: [LogModel.self, EmojiItem.self])
+        .modelContainer(for: [LogModel.self])
         .environmentObject(ThemeManager())
     }
 }

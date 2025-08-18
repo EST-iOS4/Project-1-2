@@ -42,7 +42,7 @@ struct ContentHeaderView: View {
     }
     
     @State private var showPopover = false
-    @Query private var emojis: [EmojiItem]
+//    @Query private var emojis: [EmojiItem]
     @Environment(\.modelContext) private var modelContext
     @State private var showNewLogView = false
     @State private var showSettingView: Bool = false

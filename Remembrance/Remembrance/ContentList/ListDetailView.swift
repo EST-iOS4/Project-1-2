@@ -10,6 +10,7 @@ import SwiftData
 
 struct ListDetailView: View {
     @Environment(\.modelContext) private var modelContext
+  @EnvironmentObject var themeManager : ThemeManager
     //    @Query private var logModel: [LogModel]
     let logModel: LogModel
     
@@ -46,7 +47,7 @@ struct ListDetailView: View {
 //                    .foregroundStyle(.green)
                     .overlay {
                         VStack {
-                            Image(logModel.emoji)
+                            Image("\(themeManager.currentTheme)\(logModel.emoji)")
                                 .resizable()
                                 .frame(width: 60, height: 60)
                         }

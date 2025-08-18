@@ -34,17 +34,17 @@ class LogModel: Identifiable {
     }
 }
 
-@Model
-class EmojiItem: Identifiable{
-    @Attribute(.unique) var id: UUID
-    var type: String          // "분노한" 등
-    var count: Int
-    var imageName: String     // Assets의 이름
-
-    init(id: UUID = UUID(), type: String, count: Int, imageName: String) {
-        self.id = id
-        self.type = type
-        self.count = count
-        self.imageName = imageName
-    }
-}
+//@Model
+//class EmojiItem: Identifiable{
+//    @Attribute(.unique) var id: UUID
+//    var type: String          // "분노한" 등
+//    var count: Int
+//    var imageName: String     // Assets의 이름
+//
+//    init(id: UUID = UUID(), type: String, count: Int, imageName: String) {
+//        self.id = id
+//        self.type = type
+//        self.count = count
+//        self.imageName = imageName
+//    }
+//}

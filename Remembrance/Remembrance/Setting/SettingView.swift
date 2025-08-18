@@ -97,17 +97,3 @@ struct SettingView: View {
 #Preview {
   SettingView()
 }
-
-//enum Theme: String, CaseIterable {
-//  case systemDefault = "Default"
-////  case defaultEmoji = "기본"
-////  case pepeEmoji = "페페"
-//  
-//  
-//  var colorScheme: ColorScheme? {
-//    switch self {
-//    case .systemDefault:
-//      return nil
-//    }
-//  }
-//}
