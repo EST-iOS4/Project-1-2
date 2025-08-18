@@ -9,7 +9,7 @@ import SwiftData
 
 struct LogMilestoneSectionView: View {
     @Binding var milestones: [MilestoneItem]
-    @Query private var emojis: [EmojiItem]
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack{
@@ -56,3 +56,4 @@ struct LogMilestoneSectionView: View {
             .cornerRadius(12)
     }
 }
+
