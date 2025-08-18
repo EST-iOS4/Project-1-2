@@ -53,18 +53,21 @@ struct ContentListView: View {
         .init(type: "행복한", count: 4, imageName: "pepeHappy")
     ]
     
-    
+
     
     @State private var milestones: [MilestoneItem] = [
-        .init(name: "", centimeter: 0,meter: "", imageName: "nice"),
-        .init(name: "피카츄 2.5마리를\n가로로 눕혀 놓은 길이에요!", centimeter: 500,meter: "5m", imageName: "pika"),
-        .init(name: "돼지고기 삼겹살 약 60줄 줄 세운 길이에요!", centimeter: 1000,meter: "10m", imageName: "sam"),
-        .init(name: "마포대교만큼의 길이에요!", centimeter: 140000, meter: "1,400m!", imageName: "Mapo"),
-        .init(name: "마라톤 완주한 길이에요!", centimeter: 4219500,meter: "42,195m!", imageName: "marathon"),
+        .init(name: "첫 걸음을 내디뎠어요!", centimeter: 0, meter: "", imageName: "milestonestart"),
+        .init(name: "학교 운동장을 한 바퀴 돌 만큼 기록했어요!", centimeter: 400, meter: "400m", imageName: "milestonetrack"),
+        .init(name: "작은 산 하나를 올랐어요!", centimeter: 2000, meter: "2km", imageName: "milestonemountain"),
+        .init(name: "한강을 끝까지 달렸어요!", centimeter: 25000, meter: "25km", imageName: "milestonehangang"),
+        .init(name: "제주도를 횡단한 거리예요! 놀라워요!", centimeter: 42195, meter: "42.195km", imageName: "milestonejeju"),
     ]
     
+<<<<<<< HEAD
     
     
+=======
+>>>>>>> origin/main
     var body: some View {
         VStack{
             List {
@@ -87,7 +90,7 @@ struct ContentListView: View {
                         LogChartHeaderView()
                     }
                     VStack(alignment: .leading) {
-                        LogChartView()
+                        LogChartView(selectedDate: selectedDate)
                     }
                     .padding(.bottom, 20)
                     .listRowSeparator(.hidden)

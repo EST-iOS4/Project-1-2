@@ -17,8 +17,16 @@ struct LogRowView: View {
     
     var body: some View {
         NavigationLink(destination: ListDetailView(logModel: logModel)) {
-            Text("\(logModel.date, formatter: dateFormatter)")
-                .foregroundColor(.primary)
+            HStack {
+                Text("\(logModel.title)")
+                    .font(.system(size: 18, weight: .medium))
+                
+                Spacer()
+                
+                Text("\(logModel.date, formatter: dateFormatter)")
+                    .font(.system(size: 12))
+                    .foregroundColor(.primary)
+            }
         }
     }
 }

@@ -4,36 +4,82 @@
 //
 //  Created by 엄정민 on 8/17/25.
 //
-import SwiftUI
-import SwiftData
+
 import Charts
+import SwiftData
+import SwiftUI
 
 struct LogChartView: View {
-    @Query private var emojis: [EmojiItem]
-    @Environment(\.modelContext) private var modelContext
-    
+    let selectedDate: Date
+    @Query private var logs: [LogModel]
+    // pepeEmoji.allCases 순서대로 막대를 만들기 위해 사용
+
+    private struct EmojiBar: Identifiable {
+        let id = UUID()
+        let emoji: pepeEmoji
+        let count: Int
+        var imageName: String { emoji.pepeImage }
+    }
+
+    // 해당 월의 시작, 다음 달 시작
+    private var startOfMonth: Date {
+        Calendar.current.date(
+            from: Calendar.current.dateComponents([.year, .month], from: selectedDate)
+        )!
+    }
+    private var startOfNextMonth: Date {
+        Calendar.current.date(byAdding: .month, value: 1, to: startOfMonth)!
+    }
+
+    // 해당 월 로그만 필터링하기 pepeEmoji 순서대로 개수 산출
+    private var bars: [EmojiBar] {
+        let monthLogs = logs.filter {
+            $0.date >= startOfMonth && $0.date < startOfNextMonth && !$0.emoji.isEmpty
+        }
+        // 이미지이름(String) → enum 매칭
+        func toEnum(_ name: String) -> pepeEmoji? {
+            pepeEmoji.allCases.first { $0.pepeImage == name }
+        }
+        // 모든 이모지를 0 포함해 고정 순서로 만듦
+        return pepeEmoji.allCases.map { e in
+            let c = monthLogs.filter { $0.emoji == e.pepeImage }.count // 이모티콘 개수
+            return EmojiBar(emoji: e, count: c)
+        }
+    }
+
     var body: some View {
-        let hasAnyCount = emojis.contains { $0.count > 0 }
-        
-        VStack (alignment: .leading){
-            if hasAnyCount {
-                Chart(emojis) {emoji in
-                    PointMark(
-                        x: .value("Shape Type", emoji.type),
-                        y: .value("Total Count", emoji.count)
-                    )
-                    .symbol {
-                        Image(emoji.imageName)
-                            .resizable()
-                            .scaledToFit()
-                            .scaleEffect(0.07)
-                    }
-                }.chartXAxis(.hidden)
-            } else{
-                Text("아직 데이터가 없어요. \n오른쪽 상단 버튼으로 기록해보세요.")
+        VStack(alignment: .leading) {
+            if bars.allSatisfy({ $0.count == 0 }) {
+                Text("이 달의 데이터가 없어요. 기록을 추가해 보세요.")
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, minHeight: 160)
-                    .multilineTextAlignment(.center)
+            } else {
+                Chart(bars) { item in
+                    BarMark(
+                        x: .value("Emoji", item.imageName),
+                        y: .value("Count", item.count)
+                    )
+                    .annotation(position: .top) {
+                        if item.count > 0 {
+                            Text("\(item.count)").font(.caption2).foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                .chartXAxis {
+                    AxisMarks(values: bars.map { $0.imageName }) { v in
+                        AxisGridLine()
+                        AxisTick()
+                        AxisValueLabel {
+                            if let name = v.as(String.self) {
+                                Image(name)
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                            }
+                        }
+                    }
+                }
+                .frame(minHeight: 160)
             }
         }
     }

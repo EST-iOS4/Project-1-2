@@ -8,6 +8,8 @@ import SwiftUI
 import SwiftData
 
 struct LogListSectionView: View {
+    @State private var showAlert: Bool = false
+    
     let logs: [LogModel]
     @Environment(\.modelContext) private var modelContext
     
@@ -28,11 +30,18 @@ struct LogListSectionView: View {
                         .listStyle(.plain)
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button {
-                                modelContext.delete(log)
+                                showAlert = true
                             } label: {
                                 Text("삭제")
                             }
                             .tint(.red)
+                        }
+                        .alert("정말로 삭제하시겠습니까?", isPresented: $showAlert) {
+                            Button(role: .destructive) {
+                                modelContext.delete(log)
+                            } label: {
+                                Text("삭제")
+                            }
                         }
                 }
             }
