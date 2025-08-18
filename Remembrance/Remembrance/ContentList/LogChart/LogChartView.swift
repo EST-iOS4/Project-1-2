@@ -67,6 +67,7 @@ struct LogChartView: View {
                     .annotation(position: .top) {
                         if item.count > 0 {
                             Text("\(item.count)").font(.caption2).foregroundStyle(.secondary)
+                            
                         }
                     }
                 }
