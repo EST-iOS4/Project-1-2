@@ -12,6 +12,7 @@ import SwiftUI
 struct LogChartView: View {
     let selectedDate: Date
     @Query private var logs: [LogModel]
+    @EnvironmentObject var themeManager : ThemeManager
     // pepeEmoji.allCases 순서대로 막대를 만들기 위해 사용
 
     private struct EmojiBar: Identifiable {
@@ -19,6 +20,10 @@ struct LogChartView: View {
         let emoji: pepeEmoji
         let count: Int
         var imageName: String { emoji.pepeImage }
+//      let id = UUID()
+//      let emoji: Emotion
+//      let count: Int
+//      var imageName: String
     }
 
     // 해당 월의 시작, 다음 달 시작

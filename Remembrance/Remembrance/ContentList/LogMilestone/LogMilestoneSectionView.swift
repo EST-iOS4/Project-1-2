@@ -13,7 +13,7 @@ struct LogMilestoneSectionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack{
-                VStack{
+              VStack (alignment: .leading) {
                     if milestones[1].centimeter < 1{
                         Text("현재 \(milestones[1].centimeter) cm 입니다!")
                     }else if milestones[1].centimeter < 100 {

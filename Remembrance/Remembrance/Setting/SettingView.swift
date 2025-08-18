@@ -11,15 +11,7 @@ import SwiftData
 struct SettingView: View {
   @Environment(\.dismiss) var dismiss
   @Environment(\.colorScheme) private var scheme
-  @AppStorage("currentTheme") private var currentTheme: String = "emoji"
-//  @AppStorage private var fontSize: Double = 18.0
-  // Double 타입으로 저장
-  @AppStorage("fontSize") private var fontSize: Double = 18.0
-      
-      // 실제 사용할 CGFloat
-      private var fontSizeValue: CGFloat {
-        CGFloat(fontSize)
-      }
+  @EnvironmentObject var themeManager : ThemeManager
   @State var themeText = ""
   
   var body: some View {
@@ -63,7 +55,7 @@ struct SettingView: View {
           Text("테마").font(.title3).bold()
           
           VStack (spacing: 16){
-            Picker("", selection: $currentTheme) {
+            Picker("", selection: $themeManager.currentTheme) {
               Text("기본").tag("emoji")
               Text("페페").tag("pepe")
               Text("블러썸").tag("blossom")
@@ -73,7 +65,7 @@ struct SettingView: View {
               .frame(width: 255, height: 255)
               .foregroundStyle(.gray)
               .overlay{
-                Image("\(currentTheme)Main")
+                Image("\(themeManager.currentTheme)Main")
                   .resizable()
                   .aspectRatio(contentMode: .fit)
                   .clipped()
@@ -84,9 +76,9 @@ struct SettingView: View {
             Text("\(themeText)")
           }
           
-          .onChange(of: currentTheme, initial: true) {
-            themeText = "현재 테마는 \(themeDisplayName(for: currentTheme)) 입니다"
-//            UserDefaults.standard.set(currentTheme, forKey: "currentTheme")
+          .onChange(of: themeManager.currentTheme, initial: true) {
+            themeText = "현재 테마는 \(themeDisplayName(for: themeManager.currentTheme)) 입니다"
+
           }
         }
         Spacer()

@@ -9,6 +9,6 @@ import SwiftUI
 
 extension Image {
     init(theme: String, emotion: Emotion) {
-        self.init("\(theme)_\(emotion.rawValue)")
+        self.init("\(theme)\(emotion.rawValue)")
     }
 }

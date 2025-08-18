@@ -41,7 +41,7 @@ struct ContentListView: View {
             .sorted { $0.date > $1.date }   
     }
 
-    @Query private var emojis: [EmojiItem]
+//    @Query private var emojis: [EmojiItem]
     @Environment(\.modelContext) private var modelContext
     
     @State private var pepes: [PepeItem] = [
@@ -73,7 +73,7 @@ struct ContentListView: View {
                     VStack{
                         LogMilestoneSectionView(milestones: $milestones)
                     }
-                    .padding(.bottom, 28)
+                    .padding(.bottom, 44)
                     .frame(maxWidth: .infinity, minHeight: 130)
                 }
                 .listRowSeparator(.hidden)
@@ -81,15 +81,16 @@ struct ContentListView: View {
                 
                 // MARK: 감정통계 뷰 섹션
                 Section {
-                    VStack{
+                    VStack(alignment: .leading, spacing: 16){
                         LogChartHeaderView()
+                      LogChartView(selectedDate: selectedDate)
                     }
-                    VStack(alignment: .leading) {
-                        LogChartView(selectedDate: selectedDate)
-                    }
-                    .padding(.bottom, 20)
+//                    VStack(alignment: .leading) {
+//                        LogChartView(selectedDate: selectedDate)
+//                    }
+                    .padding(.bottom, 28)
                     .listRowSeparator(.hidden)
-                    .frame(height: 120)
+                    .frame(height: 160)
                 }
                 
                 

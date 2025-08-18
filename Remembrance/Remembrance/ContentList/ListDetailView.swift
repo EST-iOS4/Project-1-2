@@ -41,7 +41,7 @@ struct ListDetailView: View {
                 
                 
                 Circle()
-                    .stroke(Color.black, lineWidth: 2)
+                    .stroke(Color.gray, lineWidth: 2)
                     .frame(width: 120, height: 120)
 //                    .foregroundStyle(.green)
                     .overlay {

@@ -10,11 +10,13 @@ import SwiftData
 
 @main
 struct RemembranceApp: App {
+  @StateObject var themeManager = ThemeManager()
     var body: some Scene {
         WindowGroup {
             HomeView()
         }
         .modelContainer(for: [LogModel.self, EmojiItem.self])
+        .environmentObject(ThemeManager())
     }
 }
 
