@@ -62,12 +62,6 @@ struct ContentListView: View {
         .init(name: "한강을 끝까지 달렸어요!", centimeter: 25000, meter: "25km", imageName: "milestonehangang"),
         .init(name: "제주도를 횡단한 거리예요! 놀라워요!", centimeter: 42195, meter: "42.195km", imageName: "milestonejeju"),
     ]
-    
-<<<<<<< HEAD
-    
-    
-=======
->>>>>>> origin/main
     var body: some View {
         VStack{
             List {
