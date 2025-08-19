@@ -14,6 +14,7 @@ struct LogChartHeaderView: View{
     
     var body: some View {
       Text("이번달 기분은요~")
+        .font(.title2).fontWeight(.semibold)
 //        let hasAnyCount = emojis.contains { $0.count > 0 }
 //        if hasAnyCount,
 //           let top = emojis.max(by: { $0.count < $1.count }),

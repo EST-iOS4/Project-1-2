@@ -59,15 +59,12 @@ struct LogChartView: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      let _ = print("DebugcurrentTheme:", "\(themeManager.currentTheme)")
       if bars.allSatisfy({ $0.count == 0 }) {
         Text("이 달의 데이터가 없어요. 기록을 추가해 보세요.")
           .foregroundStyle(.secondary)
           .frame(maxWidth: .infinity, minHeight: 160)
       } else {
         Chart(bars) { item in
-          let _ = print("Debug:", "\(themeManager.currentTheme)\(item.emotionName)")
-          
           BarMark(
             x: .value("Emoji", "\(themeManager.currentTheme)\(item.emotionName)"),
             y: .value("Count", item.count),
