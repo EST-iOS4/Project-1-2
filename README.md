@@ -45,8 +45,11 @@ macOS는 지원하지 않습니다.
 # 폴더구조
 <pre lang="markdown">
 Remembrance
+├── Utils
+│   └── Extention
+│
 ├── Model
-│   ├── EmojisSeed.swift
+│   ├── EmotionModel.swift
 │   └── LogModel.swift
 │
 ├── Main
@@ -69,7 +72,7 @@ Remembrance
 │   │   ├── LogListSectionView.swift
 │   │   └── LogRowView.swift
 │   │
-│   ├── SaveView.swift
+│   ├── NewLogView.swift
 │   └── ListDetailView.swift
 │
 ├── OnBoarding
@@ -77,9 +80,6 @@ Remembrance
 │
 ├── Setting
 │   └── SettingView.swift
-│
-├── Statistics
-│   └── StatisticsView.swift
 │
 ├── Components
 │   └── YearMonthPicker.swift
