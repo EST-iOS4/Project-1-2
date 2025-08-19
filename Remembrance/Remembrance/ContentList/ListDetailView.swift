@@ -64,7 +64,8 @@ struct ListDetailView: View {
                         
                         Spacer()
                         
-                        Text("\(logModel.tag)")
+                        Text("#\(logModel.tag)")
+                            .font(.system(size: 15))
                     }
                     RoundedRectangle(cornerRadius: 20)
                         .overlay(alignment: .topLeading) {
