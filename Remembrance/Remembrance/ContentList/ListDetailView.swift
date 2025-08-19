@@ -49,7 +49,9 @@ struct ListDetailView: View {
                         VStack {
                             Image("\(themeManager.currentTheme)\(logModel.emoji)")
                                 .resizable()
-                                .frame(width: 60, height: 60)
+                                .frame(width: 100, height: 100)
+                                .scaledToFill()
+                                .clipShape(Circle())
                         }
                     }
                 
