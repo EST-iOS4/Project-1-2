@@ -16,7 +16,7 @@ struct LogRowView: View {
     }()
     
     var body: some View {
-        NavigationLink(destination: LogDetailView(logModel: logModel)) {
+        NavigationLink(destination: LogListDetailView(logModel: logModel)) {
             HStack {
                 Text("\(logModel.title)")
                     .font(.system(size: 18, weight: .medium))

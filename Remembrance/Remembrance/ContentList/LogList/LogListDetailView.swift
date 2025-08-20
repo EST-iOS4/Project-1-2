@@ -1,14 +1,13 @@
 //
-//  ListDetailView.swift
+//  LogListDetailView.swift
 //  Remembrance
 //
 //  Created by JaeyoungLee on 8/11/25.
 //
-
 import SwiftUI
 import SwiftData
 
-struct LogDetailView: View {
+struct LogListDetailView: View {
     @Environment(\.modelContext) private var modelContext
   @EnvironmentObject var themeManager : ThemeManager
     //    @Query private var logModel: [LogModel]
@@ -88,6 +87,6 @@ struct LogDetailView: View {
 }
 
 #Preview {
-    LogDetailView(logModel: LogModel(id: UUID(), emoji: ""))
+    LogListDetailView(logModel: LogModel(id: UUID(), emoji: ""))
 }
 

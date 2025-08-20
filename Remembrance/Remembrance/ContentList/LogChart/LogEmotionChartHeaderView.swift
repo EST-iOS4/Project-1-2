@@ -1,5 +1,5 @@
 //
-//  LogChartHeaderView.swift
+//  LogEmotionChartHeaderView.swift
 //  Remembrance
 //
 //  Created by 엄정민 on 8/17/25.
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import Charts
 
-struct LogChartHeaderView: View{
+struct LogEmotionChartHeaderView: View{
     @Query private var logModel: [LogModel]
     let selectedDate: Date
     
@@ -46,7 +46,7 @@ struct LogChartHeaderView: View{
     var body: some View {
         let maxCountEmoji = maxEmojiCount.max(by: { $0.count < $1.count } )
         if let maxCount = maxCountEmoji, maxCount.count > 0 {
-            Text("이번달 기분은요 \(maxCount.emotionName)\(maxCount.count)회")
+          Text("이달의 기분은.. \(maxCount.emotionType.KrName)")
                 .font(.title2).fontWeight(.semibold)
         } else {
             Text("이번달 기분을 기록해보세요.")

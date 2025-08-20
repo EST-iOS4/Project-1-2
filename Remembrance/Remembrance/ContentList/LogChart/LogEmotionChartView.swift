@@ -1,5 +1,5 @@
 //
-//  LogChartView.swift
+//  LogEmotionChartView.swift
 //  Remembrance
 //
 //  Created by 엄정민 on 8/17/25.
@@ -9,7 +9,7 @@ import Charts
 import SwiftData
 import SwiftUI
 
-struct LogChartView: View {
+struct LogEmotionChartView: View {
   let selectedDate: Date
   @Query private var logs: [LogModel]
   @EnvironmentObject var themeManager : ThemeManager

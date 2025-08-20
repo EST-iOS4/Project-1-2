@@ -71,8 +71,8 @@ struct ContentListView: View {
                 // MARK: 감정통계 뷰 섹션
                 Section {
                     VStack(alignment: .leading, spacing: 16){
-                        LogChartHeaderView(selectedDate: selectedDate)
-                      LogChartView(selectedDate: selectedDate)
+                        LogEmotionChartHeaderView(selectedDate: selectedDate)
+                      LogEmotionChartView(selectedDate: selectedDate)
                     }
 //                    VStack(alignment: .leading) {
 //                        LogChartView(selectedDate: selectedDate)

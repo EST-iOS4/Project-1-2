@@ -11,7 +11,7 @@ import UIKit
 //    case Angry,
 //    case Happy,
 //         Blank, Flustered, Cry, Gloomy
-//  
+//
 ////  static func imageName(theme: String, emotion: EmotionType) -> String {
 ////          return "\(theme)\(emotion.rawValue)"
 ////      }
@@ -20,9 +20,9 @@ import UIKit
 ////    static func image(theme: String, emotion: Emotion) -> UIImage? {
 ////        return UIImage(named: "\(theme)_\(emotion.rawValue)")
 ////    }
-////  
-//  
- 
+////
+//
+
 enum emotionType: CaseIterable {
   case Happy
   case Blank
@@ -52,4 +52,16 @@ enum emotionType: CaseIterable {
       return "Gloomy"
     }
   }
+  
+  var KrName: String {
+    switch self {
+    case .Happy: return "기뻐요"
+    case .Blank: return "멍했어요"
+    case .Flustered: return "당황했어요"
+    case .Angry: return "화났어요"
+    case .Cry: return "슬펐어요"
+    case .Gloomy: return "우울했어요"
+    }
+  }
+  
 }

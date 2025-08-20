@@ -53,8 +53,8 @@ struct ContentHeaderView: View {
                 showPopover.toggle()
             } label: {
                 HStack(spacing: 6) {
-                    Text("\(selectedMonth)월")
-                        .font(.largeTitle)
+                    Text("\(selectedYear)년 \(selectedMonth)월")
+                    .font(.title)
                     
                     Image(systemName: "chevron.down")
                         .font(.title3)
