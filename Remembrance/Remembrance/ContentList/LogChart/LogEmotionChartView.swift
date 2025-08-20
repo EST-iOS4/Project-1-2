@@ -39,7 +39,7 @@ struct LogEmotionChartView: View {
       $0.date >= startOfMonth && $0.date < startOfNextMonth && !$0.emoji.isEmpty
     }
     print("Debug monthLogs:\(monthLogs)")
-  
+    
     // 모든 이모지를 0 포함해 고정 순서로 만듦
     return emotionType.allCases.map { e in
       let c = monthLogs.filter { $0.emoji == e.emotionString }.count // 이모티콘 개수
@@ -50,12 +50,17 @@ struct LogEmotionChartView: View {
   
   var body: some View {
     let b = bars   // ← 여기서 1번만 계산
-
+    
     VStack(alignment: .leading) {
       if b.allSatisfy({ $0.count == 0 }) {
         Text("이 달의 데이터가 없어요. 기록을 추가해 보세요.")
+          .font(.body)
           .foregroundStyle(.secondary)
           .frame(maxWidth: .infinity, minHeight: 160)
+          .overlay(
+            RoundedRectangle(cornerRadius: 12)
+              .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+          )
       } else {
         Chart(b) { item in
           BarMark(

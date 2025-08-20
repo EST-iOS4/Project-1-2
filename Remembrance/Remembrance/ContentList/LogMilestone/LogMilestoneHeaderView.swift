@@ -13,8 +13,8 @@ struct LogMilestoneHeaderView: View{
         VStack(alignment: .leading){
             Spacer()
             HStack{
-                Text("글자가 1cm 라면?")
-                    .font(.title2).fontWeight(.semibold)
+                Text("작성한 글을 cm로 환산했어요!")
+                .font(.callout).fontWeight(.heavy)
             }
         }
     }

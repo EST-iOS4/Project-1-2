@@ -17,12 +17,13 @@ struct LogListSectionView: View {
     var body: some View {
         if logs.isEmpty {
             Text("아직 기록이 없네요!")
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(.secondary)
-                .frame(alignment: .center)
-                .listRowSeparator(.hidden)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding([.top,.bottom], 28)
+            .font(.body)
+            .foregroundStyle(.secondary)
+            .frame(maxWidth: .infinity, minHeight: 250)
+            .overlay(
+              RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+            )
         } else {
             // 필요 시 더보기 로직
             ForEach(logs) { log in
