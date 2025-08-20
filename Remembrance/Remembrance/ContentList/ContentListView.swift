@@ -44,17 +44,6 @@ struct ContentListView: View {
 //    @Query private var emojis: [EmojiItem]
     @Environment(\.modelContext) private var modelContext
     
-    @State private var pepes: [PepeItem] = [
-        .init(type: "멍때리는", count: 5, imageName: "pepeBlank"),
-        .init(type: "슬픈", count: 4, imageName: "pepeCry"),
-        .init(type: "분노한", count: 8, imageName: "pepeAngry"),
-        .init(type: "당황한", count: 3, imageName: "pepeFlustered"),
-        .init(type: "우울한", count: 4, imageName: "pepeGloomy"),
-        .init(type: "행복한", count: 4, imageName: "pepeHappy")
-    ]
-    
-
-    
     @State private var milestones: [MilestoneItem] = [
         .init(name: "첫 걸음을 내디뎠어요!", centimeter: 0, meter: "", imageName: "milestonestart"),
         .init(name: "학교 운동장을 한 바퀴 돌 만큼 기록했어요!", centimeter: 400, meter: "400m", imageName: "milestonetrack"),
