@@ -52,7 +52,8 @@ struct NewLogView: View {
 
         // MARK: - 날짜 칸
         HStack {
-          Text("날짜").font(.title3).fontWeight(.semibold)
+          Text("날짜")
+            .font(.callout).fontWeight(.heavy)
           DatePicker("", selection: $selectDate, displayedComponents: [.date])
             .datePickerStyle(.compact)
             .environment(\.locale, .init(identifier: "ko_KR"))
@@ -84,7 +85,7 @@ struct NewLogView: View {
         VStack(alignment: .leading, spacing: 16) {
           HStack {
             Text("내용")
-              .font(.title3).fontWeight(.semibold)
+              .font(.callout).fontWeight(.heavy)
             
             Spacer()
             

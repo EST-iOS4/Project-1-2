@@ -47,10 +47,10 @@ struct LogEmotionChartHeaderView: View{
         let maxCountEmoji = maxEmojiCount.max(by: { $0.count < $1.count } )
         if let maxCount = maxCountEmoji, maxCount.count > 0 {
           Text("이달의 기분은.. \(maxCount.emotionType.KrName)")
-            .font(.callout).fontWeight(.heavy)
+            .font(.body).fontWeight(.black)
         } else {
             Text("이번달 기분을 기록해보세요.")
-            .font(.callout).fontWeight(.heavy)
+            .font(.body).fontWeight(.black)
         }
     }
 }

@@ -13,8 +13,8 @@ struct LogMilestoneHeaderView: View{
         VStack(alignment: .leading){
             Spacer()
             HStack{
-                Text("작성한 글을 cm로 환산했어요!")
-                .font(.callout).fontWeight(.heavy)
+                Text("지금까지 작성한 글을 cm로 환산했어요!")
+                .font(.body).fontWeight(.black)
             }
         }
     }
