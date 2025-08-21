@@ -58,7 +58,10 @@ struct LogMilestoneSectionView: View {
         }
         .frame(maxHeight: .infinity, alignment: .bottomTrailing)
       }
-    }.background(Color(.systemGray4))
+    }
+    //텍스트 사이즈 시스템설정에서 늘려서 이상해질 경우 minHeight 160으로 변경하기
+    .frame(minHeight: 130)
+    .background(Color(.systemGray4))
       .cornerRadius(12)
   }
 }

@@ -30,8 +30,9 @@ struct LogListSectionView: View {
       ForEach(logs) { log in
         
         LogRowView(logModel: log)
+          .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
           .listStyle(.plain)
-//          .listRowInsets(EdgeInsets())
+          .listRowBackground(Color(.clear))
           .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button {
               deleteID = log.id
