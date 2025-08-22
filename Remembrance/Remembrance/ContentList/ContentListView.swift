@@ -41,7 +41,6 @@ struct ContentListView: View {
       .sorted { $0.date > $1.date }
   }
   
-  //    @Query private var emojis: [EmojiItem]
   @Environment(\.modelContext) private var modelContext
   
   @State private var milestones: [MilestoneItem] = [
@@ -53,95 +52,43 @@ struct ContentListView: View {
   ]
   
   var body: some View {
-    VStack(spacing: 0) {
-      // ScrollView 대신 그냥 VStack
-      VStack(alignment: .leading, spacing: 0) {
-        // MARK: - 마일스톤 뷰 섹션
-        LogMilestoneHeaderView()
-          .padding(.vertical, 8)
-        LogMilestoneSectionView(milestones: $milestones)
-          .padding(.bottom, 15)
-        
-        // MARK: 감정통계 뷰 섹션
-        LogEmotionChartHeaderView(selectedDate: selectedDate)
-          .padding(.vertical, 8)
-        LogEmotionChartView(selectedDate: selectedDate)
-          .padding(.bottom, 20)
-        Divider()
-        
-        // MARK: - 로그 뷰 섹션
-        LogListHeaderView()
-          .padding(.vertical, 8)
-        Divider()
-      }
-      .padding(.leading, 15)
-      .padding(.trailing, 15)
+    List {
+      // MARK: - 마일스톤
+      LogMilestoneHeaderView()
+        .padding(.bottom, 4)
+        .listRowSeparator(.hidden)
       
-      // MARK: - 로그 리스트 (진짜 스크롤 되는 부분)
-      List {
-        LogListSectionView(logs: monthLogs)
-          .foregroundColor(.primary)
-      }
-      .listStyle(.plain)
-      .padding(.leading, 15)
-      .padding(.trailing, 15)
-      .scrollContentBackground(.hidden)
-      .background(Color(.secondaryLabel).opacity(0.3))
+      LogMilestoneSectionView(milestones: $milestones)
+        .padding(.bottom, 15)
+      
+      // MARK: - 감정통계
+      LogEmotionChartHeaderView(selectedDate: selectedDate)
+        .padding(.bottom, 4)
+        .listRowSeparator(.hidden)
+      
+      LogEmotionChartView(selectedDate: selectedDate)
+        .padding(.bottom, 20)
+      
+      // MARK: - 로그
+      LogListHeaderView()
+        .padding(.vertical, 8)
+        .listRowSeparator(.hidden)
+      
+      LogListSectionView(logs: monthLogs)
+        .foregroundColor(.primary)
+        .padding(.leading, 15)
+        .padding(.trailing, 15)
     }
+    .listStyle(.plain)
+    //색 전체적으로 넣고싶으면 스크롤콘텐트배경 활성화 하고 색넣으면 됨
+    .scrollContentBackground(.hidden)
+    .listSectionSpacing(0)
     .safeAreaInset(edge: .top) {
       ContentHeaderView(selectedDate: $selectedDate)
         .background(.ultraThinMaterial)
         .overlay(Divider(), alignment: .bottom)
     }
-    
-    
-    
-    
-    
-    
-    
-    //LazyVStack >> 자식뷰도 변경해야함 >> 스와이프삭제 커스텀해야함
-    
-    //      VStack {
-    //          ScrollView {
-    //              LazyVStack(alignment: .leading, spacing: 0) {
-    //
-    //                  // MARK: - 마일스톤 뷰 섹션
-    //                  LogMilestoneHeaderView()
-    //                      .foregroundColor(.primary)
-    //                      .padding(.vertical, 8)
-    //                  LogMilestoneSectionView(milestones: $milestones)
-    //                  Divider().padding(.bottom, 15)
-    //
-    //
-    //                  // MARK: 감정통계 뷰 섹션
-    //                  LogEmotionChartHeaderView(selectedDate: selectedDate)
-    //                      .foregroundColor(.primary)
-    //                      .padding(.vertical, 8)
-    //                  LogEmotionChartView(selectedDate: selectedDate)
-    //                  Divider().padding(.bottom, 15)
-    //
-    //
-    //                  // MARK: - 로그 뷰 섹션
-    //                  LogListHeaderView()
-    //                      .foregroundColor(.primary)
-    //                      .padding(.vertical, 8)
-    //
-    //                  LogListSectionView(logs: monthLogs)
-    //                      .foregroundColor(.secondary)
-    //
-    //
-    //              }
-    //              .padding(.horizontal) // row 좌우 여백
-    //          }
-    //          .safeAreaInset(edge: .top) {
-    //              ContentHeaderView(selectedDate: $selectedDate)
-    //                  .background(.ultraThinMaterial)
-    //                  .overlay(Divider(), alignment: .bottom)
-    //          }
-    //      }
   }
-  
 }
 
 
